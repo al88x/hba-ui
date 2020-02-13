@@ -1,4 +1,4 @@
-@import "../general-styling.scss";
+@import "src/styles/general-styling";
 
 
 .loginPage {
@@ -66,6 +66,20 @@
     margin: 20px 0;
     font-size: 1em;
     flex-grow: 1;
+  }
+
+  .wrong-credentials{
+    background: tomato;
+    width:100%;
+    line-height: 30px;
+    text-align: center;
+    color: white;
+    height: 30px;
+    border-radius:25px;
+    display:none;
+  }
+  .visible{
+    display:block;
   }
 
 }

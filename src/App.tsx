@@ -8,9 +8,7 @@ import {UserPage} from "./components/UserPage";
 import {AdminPage} from "./components/AdminPage";
 
 const App: React.FC = () => {
-    return (
-
-        <AuthContextProvider>
+    return (<AuthContextProvider>
             <Router>
                 <Switch>
                     <Route exact path="/" component={LoginPage}/>

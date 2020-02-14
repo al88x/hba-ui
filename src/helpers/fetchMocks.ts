@@ -1,6 +1,7 @@
 export function mockSuccessfulFetch(responseBody: any) {
     const response = Promise.resolve(
         {
+            status:200,
             json: () => Promise.resolve(responseBody)
         }
     );

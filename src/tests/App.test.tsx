@@ -1,18 +1,12 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import {render,} from '@testing-library/react';
-import App, {ProtectedRoute} from '../App';
+import {ProtectedRoute} from '../App';
 import {AuthContextProvider} from "../context/AuthContext";
-import {LoginPage} from "../components/LoginPage";
 import {mockFailedFetch} from "../helpers/fetchMocks";
 import {AdminPage} from "../components/AdminPage";
 import {BrowserRouter} from "react-router-dom";
 import {UserPage} from "../components/UserPage";
 
-// test('renders App', () => {
-//     const app = document.createElement('App');
-//     ReactDOM.render(<App/>, app);
-// });
 
 
 describe('App page', () => {

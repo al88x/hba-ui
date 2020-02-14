@@ -30,19 +30,18 @@ const initialState: IState = {
 export const AuthContext = React.createContext<IState | any>(initialState);
 
 function reducer(state: IState, action: IAction): IState {
-    switch (action.type) {
-        case 'FETCH_USER':
-            return (
-                {
-                    ...state,
-                    isContextLoaded: true,
-                    isLoggedIn: action.payload.username != null,
-                    role: action.payload.role,
-                    username: action.payload.username
-                }
-            );
-        default:
-            return state;
+    if (action.type === 'FETCH_USER') {
+        return (
+            {
+                ...state,
+                isContextLoaded: true,
+                isLoggedIn: action.payload.username != null,
+                role: action.payload.role,
+                username: action.payload.username
+            }
+        );
+    } else {
+        return state;
     }
 }
 

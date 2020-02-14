@@ -90,17 +90,17 @@ describe('login page', () => {
         let response: any = ({"username": "alex_admin", "role": "ADMIN"});
         mockSuccessfulFetch(response);
 
-        const loginPage = render(
+        const app = render(
             <AuthContextProvider isContextLoaded={true} isLoggedIn={false}>
                 <BrowserRouter>
                     <LoginPage/>
                 </BrowserRouter>
             </AuthContextProvider>);
 
-        const submitButton = loginPage.getByTestId("SubmitButton");
+        const submitButton = app.getByTestId("SubmitButton");
         fireEvent(submitButton, new MouseEvent('click'));
 
-        await wait(() => expect(loginPage.queryByTestId("LoginForm")).toBeNull());
+        await wait(() => expect(app.queryByTestId("LoginForm")).toBeNull());
     });
 
     it("redirect to /user on successful login", async () => {

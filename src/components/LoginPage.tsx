@@ -7,7 +7,8 @@ import {AuthContext} from "../context/AuthContext";
 export function LoginPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [invalidCredentials, setInvalidCredentials] = useState(false)
+    const [invalidCredentials, setInvalidCredentials] = useState(false);
+    const [error, setError] = useState(false);
     const context = useContext(AuthContext);
 
 
@@ -17,24 +18,18 @@ export function LoginPage() {
         formData.append("username", username);
         formData.append("password", password);
 
-        try {
-            const jsonResponse = await asyncJSONPostFetch("http://localhost:8080/login", formData).finally();
-            setUsername("");
-            setPassword("");
-            if (jsonResponse.status === 200) {
-                await asyncGetUserDetails()
-                    .then(jsonResponse => context.dispatch({type: "FETCH_USER", payload: jsonResponse}))
-            } else {
-                setInvalidCredentials(true);
-            }
-
-        } catch (error) {
-            console.log(error);
+        const jsonResponse = await asyncJSONPostFetch("http://localhost:8080/login", formData).finally();
+        setUsername("");
+        setPassword("");
+        if (jsonResponse.status === 200) {
+            await asyncGetUserDetails()
+                .then(jsonResponse => context.dispatch({type: "FETCH_USER", payload: jsonResponse}))
+        } else {
+            setInvalidCredentials(true);
         }
     }
 
     if (!context.state.isContextLoaded) {
-        console.log("->if (!context.state.isContextLoaded) {")
         return null;
     }
 
@@ -56,11 +51,13 @@ export function LoginPage() {
                 <label>Password </label>
                 <input className="input" type="password" data-testid="Password" value={password}
                        onChange={event => setPassword(event.target.value)}/>
-                <p data-testid="InvalidCredentials"className={invalidCredentials ? "wrong-credentials visible" : "wrong-credentials"}>Invalid Username
+                <p data-testid="InvalidCredentials"
+                   className={invalidCredentials ? "wrong-credentials visible" : "wrong-credentials"}>Invalid Username
                     or Password</p>
                 <div className="login-forgot-container">
                     <input className="submit" type="submit" value="Login" data-testid="SubmitButton"/>
-                    <a href="/forgot-password" className="forgot-password" data-testid="ForgotPassword">Forgot password</a>
+                    <a href="/forgot-password" className="forgot-password" data-testid="ForgotPassword">Forgot
+                        password</a>
                 </div>
             </form>
         </section>

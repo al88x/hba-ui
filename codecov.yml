@@ -3,8 +3,8 @@ coverage:
     round: down
     status:
         project:
-            default:                
-                target: 100%
+            default:
+                target: 90%
         patch:
             default:
               target: 90%

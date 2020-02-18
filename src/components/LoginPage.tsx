@@ -8,7 +8,6 @@ export function LoginPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [invalidCredentials, setInvalidCredentials] = useState(false);
-    const [error, setError] = useState(false);
     const context = useContext(AuthContext);
 
 

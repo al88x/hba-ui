@@ -1,7 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
 import "../styles/CreateMemberPage.scss"
 import {asyncJSONPostFetch} from "../helpers/AsyncJsonFetcher";
 import {useForm} from "../helpers/useForm";
+import {Redirect} from "react-router-dom";
 
 
 interface ICreateMemberForm {
@@ -20,7 +21,8 @@ export default function CreateMemberPage() {
         email: ""
     };
 
-    const {handleChange, handleSubmit, values, errors} = useForm(submit, validateCreateMemberForm, valuesInitialState);
+    const {handleChange, handleSubmit, values, errors, handleErrorsAfterSubmit} = useForm(submit, validateCreateMemberForm, valuesInitialState);
+    const [userId, setUserId] = useState(-1);
 
     function validateCreateMemberForm(values: ICreateMemberForm) {
         let errors = {hasErrors: false, firstName: "", lastName: "", employeeNumber: "", email: ""};
@@ -51,14 +53,26 @@ export default function CreateMemberPage() {
         return {};
     }
 
-    function submit() {
+    async function submit() {
         const data = {
             firstName: values.firstName,
             lastName: values.lastName,
             employeeNumber: values.employeeNumber,
             email: values.email
         };
-        asyncJSONPostFetch("http://localhost:8080/admin/members/create", JSON.stringify(data)).finally();
+        const response = await asyncJSONPostFetch("http://localhost:8080/admin/members/create", JSON.stringify(data)).finally();
+        if (response.status === 200) {
+            response.json()
+                .then(value => setUserId(value.userId));
+        }
+        if (response.status === 400) {
+            response.json()
+                .then(value => handleErrorsAfterSubmit(value));
+        }
+    }
+
+    if (userId > 0) {
+        return <Redirect to={`/admin/members/${userId}`}/>
     }
 
     return (
@@ -78,7 +92,7 @@ export default function CreateMemberPage() {
                 <input className={`${errors.lastName ? "input invalid" : "input"}`}
                        type="text"
                        name="lastName"
-                       data-testid="LastName" 
+                       data-testid="LastName"
                        value={values.lastName}
                        onChange={handleChange}/>
                 <p className={`${errors.lastName && "error"}`}>{errors.lastName}</p>

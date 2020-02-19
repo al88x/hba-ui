@@ -15,6 +15,10 @@ export const useForm = (callback:any, validate:any, valuesInitialState:any) => {
         setIsSubmitting(true);
     };
 
+    const handleErrorsAfterSubmit = (error:any) => {
+        setErrors(error);
+    };
+
     useEffect(() => {
         if (Object.keys(errors).length === 0 && isSubmitting) {
             callback();
@@ -25,6 +29,7 @@ export const useForm = (callback:any, validate:any, valuesInitialState:any) => {
         handleChange,
         handleSubmit,
         values,
-        errors
+        errors,
+        handleErrorsAfterSubmit
     };
 };

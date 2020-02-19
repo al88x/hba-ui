@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import "../styles/MembersPage.scss"
 import {getMemberList, getMembersWithFilter} from "../helpers/AsyncJsonFetcher";
+import {useForm} from "../helpers/useForm";
 
 interface IMember {
     id: number,
@@ -14,30 +15,46 @@ enum IFilter {
     EMPLOYEE_NUMBER = "employee-number"
 }
 
+interface ISearchForm {
+    searchValue: string,
+    filter: IFilter
+}
+
 export function MembersPage() {
-    const [searchValue, setSearchValue] = useState("");
-    const [filter, setFilter] = useState<IFilter>(IFilter.NAME);
+    const valuesInitialState: ISearchForm = {
+        searchValue: "",
+        filter: IFilter.NAME
+    };
+    const {handleChange, handleSubmit, values, errors} = useForm(submit, validateSearchForm, valuesInitialState);
     const [members, setMembers] = useState<IMember[]>([]);
-    const [errorMessage, setErrorMessage] = useState("");
+    const [notFoundMessage, setNotFoundMessage] = useState("");
 
     useEffect(() => {
-        getMemberList()
-            .then(jsonResponse => setMembers(jsonResponse.items));
+            getMemberList()
+                .then(jsonResponse => setMembers(jsonResponse.items));
     }, []);
 
-    function handleSubmit() {
-        setErrorMessage("");
-        if (searchValue.length === 0) {
-            setErrorMessage("Search value should not be empty")
-        } else if (filter === IFilter.EMPLOYEE_NUMBER && isNaN(+searchValue)) {
-            setErrorMessage("Search value should be a number")
-        } else {
-            getMembersWithFilter(searchValue, filter)
-                .then(jsonResponse => setMembers(jsonResponse))
-                .catch(() => setErrorMessage("No match found..."));
+    function validateSearchForm(values: ISearchForm) {
+        let errors = {hasErrors: false, searchValue: ""};
+        if (values.searchValue.length === 0) {
+            errors.searchValue = "Search value should not be empty";
+            errors.hasErrors = true;
+        } else if (values.filter === IFilter.EMPLOYEE_NUMBER && isNaN(+values.searchValue)) {
+            errors.searchValue = "Search value should be a number";
+            errors.hasErrors = true;
         }
-        setSearchValue("");
+        if (errors.hasErrors) {
+            return errors;
+        }
+        return {};
     }
+
+    function submit() {
+        getMembersWithFilter(values.searchValue, values.filter)
+            .then(jsonResponse => setMembers(jsonResponse))
+            .catch(() => setNotFoundMessage("No match found..."));
+    }
+
 
     return (
         <div className="members-page">
@@ -45,23 +62,32 @@ export function MembersPage() {
 
                 <a href="/admin/members/create" className="create-member">Create member</a>
 
-                <form className="search-form" onSubmit={e => {e.preventDefault(); handleSubmit()}}>
+                <form className="search-form" onSubmit={event => {
+                    event.preventDefault();
+                    handleSubmit()
+                }}>
 
                     <input className="members-page-search" type="text" placeholder="Search member"
-                           value={searchValue}
-                           onChange={e => setSearchValue(e.target.value)} />
-
-                    <p className={errorMessage.length > 0 ? "error-message visible" : "error-message"}>{errorMessage}</p>
+                           name="searchValue"
+                           value={values.searchValue}
+                           onChange={handleChange}/>
+                    <p className={errors.searchValue && "error-message"}>{errors.searchValue}</p>
+                    <p className={(notFoundMessage && !errors.searchValue) ? "error-message" : "invisible"}>{notFoundMessage}</p>
 
                     <div className="radio-container">
                         <label className="radio-label">Name
-                            <input className="radio-button" type="radio" defaultChecked={true} name="filter"
-                                   value="name"
-                                   onClick={() => setFilter(IFilter.NAME)}/>
+                            <input className="radio-button" type="radio"
+                                   checked={values.filter === IFilter.NAME}
+                                   name="filter"
+                                   value={IFilter.NAME}
+                                   onChange={handleChange}/>
                         </label>
                         <label className="radio-label">Employee number
-                            <input className="radio-button" type="radio" name="filter" value="number"
-                                   onClick={() => (setFilter(IFilter.EMPLOYEE_NUMBER))}/>
+                            <input className="radio-button" type="radio"
+                                   checked={values.filter === IFilter.EMPLOYEE_NUMBER}
+                                   name="filter"
+                                   value={IFilter.EMPLOYEE_NUMBER}
+                                   onChange={handleChange}/>
                         </label>
                     </div>
                 </form>
@@ -83,9 +109,9 @@ export function MembersPage() {
                             <p className="member-username">({member.username})</p>
 
                         </a>
-                    </li>))}
+                    </li>
+                ))}
             </ul>
-
         </div>
     );
 }

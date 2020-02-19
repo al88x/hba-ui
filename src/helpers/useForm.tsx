@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 
-export const useForm = (callback:any, validate:any, initialState:any) => {
-    const [values, setValues] = useState<any>(initialState);
+export const useForm = (callback:any, validate:any, valuesInitialState:any) => {
+    const [values, setValues] = useState<any>(valuesInitialState);
     const [errors, setErrors] = useState<any>({});
     const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -19,7 +19,7 @@ export const useForm = (callback:any, validate:any, initialState:any) => {
         if (Object.keys(errors).length === 0 && isSubmitting) {
             callback();
         }
-    }, [callback,errors,isSubmitting]);
+    }, [errors]);
 
     return {
         handleChange,

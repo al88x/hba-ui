@@ -21,7 +21,7 @@ export default function CreateMemberPage() {
     };
 
     const {handleChange, handleSubmit, values, errors} = useForm(submit, validateCreateMemberForm, valuesInitialState);
-    
+
     function validateCreateMemberForm(values: ICreateMemberForm) {
         let errors = {hasErrors: false, firstName: "", lastName: "", employeeNumber: "", email: ""};
         if (values.firstName.length === 0) {

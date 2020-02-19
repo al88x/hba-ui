@@ -4,6 +4,7 @@ import {Redirect} from 'react-router-dom';
 import {asyncJSONPostFetch, asyncGetUserDetails} from "../helpers/AsyncJsonFetcher";
 import {AuthContext} from "../context/AuthContext";
 
+
 export function LoginPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -13,11 +14,11 @@ export function LoginPage() {
 
     async function handleSubmitLogin(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        const formData = new FormData();
-        formData.append("username", username);
-        formData.append("password", password);
-
-        const jsonResponse = await asyncJSONPostFetch("http://localhost:8080/login", formData).finally();
+        const formData = {
+            username: username,
+            password: password
+        };
+        const jsonResponse = await asyncJSONPostFetch("http://localhost:8080/login", JSON.stringify(formData)).finally();
         setUsername("");
         setPassword("");
         if (jsonResponse.status === 200) {

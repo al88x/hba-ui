@@ -8,6 +8,7 @@ import {UserPage} from "./components/UserPage";
 import {AdminPage} from "./components/AdminPage";
 import {Navbar} from "./components/navbar/Navbar";
 import {MembersPage} from "./components/MembersPage";
+import CreateMemberPage from "./components/CreateMemberPage";
 
 const App: React.FC = () => {
     return (
@@ -18,6 +19,7 @@ const App: React.FC = () => {
                     <Route exact path="/" component={LoginPage}/>
                     <ProtectedRoute exact path={"/admin"} component={AdminPage} roleFilter="ADMIN"/>
                     <ProtectedRoute exact path={"/admin/members"} component={MembersPage} roleFilter="ADMIN"/>
+                    <ProtectedRoute exact path={"/admin/members/create"} component={CreateMemberPage} roleFilter="ADMIN"/>
                     <ProtectedRoute exact path={"/user"} component={UserPage} roleFilter="USER"/>
                     <Route exact path="*"><PageNotFound/></Route>
                 </Switch>

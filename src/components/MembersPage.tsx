@@ -27,10 +27,9 @@ export function MembersPage() {
 
     function handleSubmit() {
         setErrorMessage("");
-
         if (searchValue.length === 0) {
             setErrorMessage("Search value should not be empty")
-        } else if (filter === IFilter.EMPLOYEE_NUMBER && isNaN(parseInt(searchValue))) {
+        } else if (filter === IFilter.EMPLOYEE_NUMBER && isNaN(+searchValue)) {
             setErrorMessage("Search value should be a number")
         } else {
             getMembersWithFilter(searchValue, filter)
@@ -44,7 +43,7 @@ export function MembersPage() {
         <div className="members-page">
             <div className="createUser-form-container">
 
-                <a href="/members/create" className="create-member">Create member</a>
+                <a href="/admin/members/create" className="create-member">Create member</a>
 
                 <form className="search-form" onSubmit={e => {e.preventDefault(); handleSubmit()}}>
 

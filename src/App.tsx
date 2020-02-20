@@ -9,6 +9,7 @@ import {AdminPage} from "./components/AdminPage";
 import {Navbar} from "./components/navbar/Navbar";
 import {MembersPage} from "./components/MembersPage";
 import CreateMemberPage from "./components/CreateMemberPage";
+import {MemberDetailsPage} from "./components/MemberDetailsPage";
 
 const App: React.FC = () => {
     return (
@@ -20,6 +21,8 @@ const App: React.FC = () => {
                     <ProtectedRoute exact path={"/admin"} component={AdminPage} roleFilter="ADMIN"/>
                     <ProtectedRoute exact path={"/admin/members"} component={MembersPage} roleFilter="ADMIN"/>
                     <ProtectedRoute exact path={"/admin/members/create"} component={CreateMemberPage} roleFilter="ADMIN"/>
+                    <ProtectedRoute exact path={"/admin/members/:id"} component={MemberDetailsPage} roleFilter="ADMIN"/>
+
                     <ProtectedRoute exact path={"/user"} component={UserPage} roleFilter="USER"/>
                     <Route exact path="*"><PageNotFound/></Route>
                 </Switch>

@@ -21,8 +21,20 @@ export async function asyncGetUserDetails() {
     return await response.json()
 }
 
+export async function getMemberById(id:string){
+    const response = await fetch(`http://localhost:8080/admin/members/searchById?id=${id}`,
+        {
+            method: 'GET',
+            credentials: "include",
+            mode: 'cors',
+            headers: {
+                "Content-Type": "application/json",
+            }
+        });
+    return response.ok ?  response.json() :  Promise.reject("Member not found");
+}
+
 export async function getMembersWithFilter(searchValue: string, filter: string) {
-    console.log(searchValue, filter)
     const response = await fetch(`http://localhost:8080/admin/members/search?value=${searchValue}&filter=${filter}`,
         {
             method: 'GET',

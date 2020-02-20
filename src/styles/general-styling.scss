@@ -16,4 +16,48 @@ $standard-padding: 15px 0;
 
 $small-tablet-breakpoint: 620px;
 $laptop-breakpoint: 960px;
-$large-desktop-breakpoint: 1200px; 
+$large-desktop-breakpoint: 1200px;
+
+
+@mixin h1{
+  font-family: $header-text;
+  font-size: 40px;
+  text-align: center;
+  color: $white-color;
+  margin: 60px 0 20px 0;
+}
+
+@mixin label{
+  text-transform: uppercase;
+  font-size: 1em;
+  color: $white-color;
+  margin: 40px 0 5px 0;
+  display:inline-block;
+
+}
+
+@mixin input{
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  color: $white-color;
+  outline: none;
+  border-bottom: 1px solid gray;
+  font-size: 0.9em;
+  font-weight: 300;
+  padding-bottom: 5px;
+}
+
+@mixin submitButton{
+  background-color: #52C4B9;
+  color: white;
+  border: none;
+  outline: none;
+  border-radius: 25px;
+  padding: 10px 0;
+  font-weight: 300;
+  cursor: pointer;
+  margin: 40px 0;
+  font-size: 1em;
+  flex-grow: 1;
+}

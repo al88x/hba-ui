@@ -1,24 +1,33 @@
 import React, {useContext} from 'react';
-import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import {RouteProps} from 'react-router';
 import {LoginPage} from "./components/LoginPage";
 import {AuthContext, AuthContextProvider} from "./context/AuthContext";
 import PageNotFound from "./components/PageNotFound";
 import {UserPage} from "./components/UserPage";
 import {AdminPage} from "./components/AdminPage";
+import {Navbar} from "./components/navbar/Navbar";
+import {MembersPage} from "./components/MembersPage";
+import CreateMemberPage from "./components/CreateMemberPage";
+import {MemberDetailsPage} from "./components/MemberDetailsPage";
 
 const App: React.FC = () => {
-    return (<AuthContextProvider>
+    return (
+        <AuthContextProvider>
             <Router>
+                <Navbar/>
                 <Switch>
                     <Route exact path="/" component={LoginPage}/>
                     <ProtectedRoute exact path={"/admin"} component={AdminPage} roleFilter="ADMIN"/>
+                    <ProtectedRoute exact path={"/admin/members"} component={MembersPage} roleFilter="ADMIN"/>
+                    <ProtectedRoute exact path={"/admin/members/create"} component={CreateMemberPage} roleFilter="ADMIN"/>
+                    <ProtectedRoute exact path={"/admin/members/:id"} component={MemberDetailsPage} roleFilter="ADMIN"/>
+
                     <ProtectedRoute exact path={"/user"} component={UserPage} roleFilter="USER"/>
                     <Route exact path="*"><PageNotFound/></Route>
                 </Switch>
             </Router>
         </AuthContextProvider>
-
     );
 }
 

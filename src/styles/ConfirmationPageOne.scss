@@ -1,0 +1,5 @@
+@import "src/styles/general-styling";
+
+.confirm-page-one {
+  @include form()
+}

@@ -21,7 +21,7 @@ export async function asyncGetUserDetails() {
     return await response.json()
 }
 
-export async function getMemberById(id:string){
+export async function getMemberById(id: string) {
     const response = await fetch(`http://localhost:8080/admin/members/searchById?id=${id}`,
         {
             method: 'GET',
@@ -31,7 +31,7 @@ export async function getMemberById(id:string){
                 "Content-Type": "application/json",
             }
         });
-    return response.ok ?  response.json() :  Promise.reject("Member not found");
+    return response.ok ? response.json() : Promise.reject("Member not found");
 }
 
 export async function getMembersWithFilter(searchValue: string, filter: string) {
@@ -48,7 +48,7 @@ export async function getMembersWithFilter(searchValue: string, filter: string) 
 }
 
 export async function getMemberList() {
-  return await fetch("http://localhost:8080/admin/members?page=1&pageSize=10",
+    return await fetch("http://localhost:8080/admin/members?page=1&pageSize=10",
         {
             method: 'GET',
             credentials: "include",
@@ -57,8 +57,49 @@ export async function getMemberList() {
                 "Content-Type": "application/json",
             }
         }).then(response => {
-        return response.ok ?  response.json() :  Promise.reject("Nothing found...");
+        return response.ok ? response.json() : Promise.reject("Nothing found...");
     });
 }
+
+export async function getMemberIdFromToken(token: string) {
+     return await fetch(`http://localhost:8080/register/confirm?token=${token}`,
+        {
+            method: 'GET',
+            credentials: "include",
+            mode: 'cors',
+            headers: {"Content-Type": "application/json"},
+        })
+        .then(response => {
+        return response.ok ? response.json() : Promise.reject("Invalid Token");
+    });
+
+}
+
+export async function isEmployeeNumberValid(token: string, employeeNumber:string) {
+    return await fetch(`http://localhost:8080/register/confirm?token=${token}&employeeNumber=${employeeNumber}`,
+        {
+            method: 'GET',
+            credentials: "include",
+            mode: 'cors',
+            headers: {"Content-Type": "application/json"},
+        })
+        .then(response => {
+            return response.ok ? response : Promise.reject({employeeNumber: "Invalid employee number"});
+        });
+}
+
+export async function savePasswordsToDatabase(data:string){
+    return await fetch("http://localhost:8080/register/confirm/pageTwo", {
+        credentials: "include",
+        mode: 'cors',
+        method: 'POST',
+        headers: {'Access-Control-Allow-Origin': 'http://localhost:3000', 'Content-Type': 'application/json'},
+        body: data
+    })
+        .then(response => {
+            return response.ok ? response : Promise.reject();
+        });
+}
+
 
 

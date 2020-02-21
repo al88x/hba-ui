@@ -73,9 +73,6 @@ export default function CreateMemberPage() {
         }
 
     }
-    if(serverError){
-
-    }
 
     if (userId > 0) {
         return <Redirect to={`/admin/members/${userId}`}/>

@@ -61,3 +61,50 @@ $large-desktop-breakpoint: 1200px;
   font-size: 1em;
   flex-grow: 1;
 }
+
+@mixin form{
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 80%;
+  max-width: 400px;
+
+  h1 {
+    @include h1();
+  }
+
+  label {
+    @include label();
+  }
+
+  input {
+    @include input();
+  }
+
+  .submit {
+    @include submitButton();
+    width: 100%;
+    text-align: center;
+  }
+
+  .error {
+    color: tomato;
+  }
+
+  .invalid {
+    border-bottom: 1px solid tomato;
+  }
+  .server-error{
+    background: rgba(255, 99, 71, 0.3);
+    border: 1px solid tomato;
+    color:tomato;
+    display: none;
+    padding:10px;
+    border-radius: 25px;
+    text-align: center;
+  }
+  .visible{
+    display: block;
+  }
+}

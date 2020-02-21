@@ -23,6 +23,7 @@ export default function CreateMemberPage() {
 
     const {handleChange, handleSubmit, values, errors, handleErrorsAfterSubmit} = useForm(submit, validateCreateMemberForm, valuesInitialState);
     const [userId, setUserId] = useState(-1);
+    const [serverError, setServerError] = useState(false);
 
     function validateCreateMemberForm(values: ICreateMemberForm) {
         let errors = {hasErrors: false, firstName: "", lastName: "", employeeNumber: "", email: ""};
@@ -64,11 +65,16 @@ export default function CreateMemberPage() {
         if (response.status === 200) {
             response.json()
                 .then(value => setUserId(value.userId));
-        }
-        if (response.status === 400) {
+        }else if (response.status === 400) {
             response.json()
                 .then(value => handleErrorsAfterSubmit(value));
+        }else{
+            setServerError(true);
         }
+
+    }
+    if(serverError){
+
     }
 
     if (userId > 0) {
@@ -116,6 +122,8 @@ export default function CreateMemberPage() {
                 <p className={`${errors.email && "error"}`}>{errors.email}</p>
 
                 <button className="submit" data-testid="SubmitButton" onClick={handleSubmit}>Submit</button>
+
+                <p className={serverError ? "server-error visible" : "server-error"}>Error submitting your request. Please try again later</p>
             </div>
         </section>
     );

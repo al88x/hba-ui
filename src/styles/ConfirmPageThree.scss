@@ -2,6 +2,8 @@
 
 .confirm-page-three {
   @include form();
+  @include circle-pagination();
+
 
   select{
     padding: 5px;

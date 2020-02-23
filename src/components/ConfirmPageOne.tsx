@@ -76,8 +76,13 @@ export function ConfirmPageOne() {
                 <p className={`${errors.employeeNumber && "error"}`}>{errors.employeeNumber}</p>
 
                 <button className="submit" data-testid="SubmitButton" onClick={handleSubmit}>Submit</button>
-
-            </section>)
+                <div className="circle-container">
+                    <span className="circle current-page"/>
+                    <span className="circle"/>
+                    <span className="circle"/>
+                </div>
+            </section>
+        )
     }
     return null;
 }

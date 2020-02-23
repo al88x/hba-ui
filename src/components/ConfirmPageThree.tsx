@@ -44,7 +44,7 @@ export function ConfirmPageThree(props: IConfirmPageProps) {
     }
 
     function submit() {
-        const data = {token: props.token, shift: values.shift, jobRole:values.jobRole, department:values.department, area:values.area}
+        const data = {token: props.token, shift: values.shift, jobRole:values.jobRole, department:values.department, area:values.area};
         saveMemberDetails(JSON.stringify(data))
             .then(()=> setSubmittedSuccessfully(true))
             .catch(()=>setServerError(true))
@@ -100,6 +100,12 @@ export function ConfirmPageThree(props: IConfirmPageProps) {
 
             <p className={serverError ? "server-error visible" : "server-error"}>Error submitting your request. Please
                 try again later</p>
+
+            <div className="circle-container">
+                <span className="circle"/>
+                <span className="circle"/>
+                <span className="circle current-page"/>
+            </div>
         </section>
     );
 }

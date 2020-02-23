@@ -17,7 +17,7 @@ interface IConfirmPageTwo {
 export function ConfirmPageTwo(props: IConfirmPageProps) {
 
     const valuesInitialState = {password: "", confirmPassword: ""};
-    const {handleChange, handleSubmit, values, errors,serverError, submittedSuccessfully, setServerError, setSubmittedSuccessfully} = useForm(submit, validateConfirmPageTwoForm, valuesInitialState);
+    const {handleChange, handleSubmit, values, errors, serverError, submittedSuccessfully, setServerError, setSubmittedSuccessfully} = useForm(submit, validateConfirmPageTwoForm, valuesInitialState);
 
 
     function validateConfirmPageTwoForm(values: IConfirmPageTwo) {
@@ -57,27 +57,32 @@ export function ConfirmPageTwo(props: IConfirmPageProps) {
         <section className="confirm-page-two">
             <h1>Set up password</h1>
 
-                <label>Password</label>
-                <input className={`${errors.password ? "input invalid" : "input"}`} data-testid="Password"
-                       type="password"
-                       value={values.password}
-                       name="password"
-                       onChange={handleChange}/>
-                <p className={`${errors.password && "error"}`}>{errors.password}</p>
+            <label>Password</label>
+            <input className={`${errors.password ? "input invalid" : "input"}`} data-testid="Password"
+                   type="password"
+                   value={values.password}
+                   name="password"
+                   onChange={handleChange}/>
+            <p className={`${errors.password && "error"}`}>{errors.password}</p>
 
-                <label>Confirm Password</label>
-                <input className={`${errors.confirmPassword ? "input invalid" : "input"}`} data-testid="ConfirmPassword"
-                       type="password"
-                       name="confirmPassword"
-                       value={values.confirmPassword}
-                       onChange={handleChange}/>
-                <p className={`${errors.confirmPassword && "error"}`}>{errors.confirmPassword}</p>
+            <label>Confirm Password</label>
+            <input className={`${errors.confirmPassword ? "input invalid" : "input"}`} data-testid="ConfirmPassword"
+                   type="password"
+                   name="confirmPassword"
+                   value={values.confirmPassword}
+                   onChange={handleChange}/>
+            <p className={`${errors.confirmPassword && "error"}`}>{errors.confirmPassword}</p>
 
-                <button className="submit" data-testid="SubmitButton" onClick={handleSubmit}>Submit</button>
+            <button className="submit" data-testid="SubmitButton" onClick={handleSubmit}>Submit</button>
 
-                <p className={serverError ? "server-error visible" : "server-error"}>Error submitting your request.
-                    Please try again later</p>
+            <p className={serverError ? "server-error visible" : "server-error"}>Error submitting your request.
+                Please try again later</p>
 
+            <div className="circle-container">
+                <span className="circle"/>
+                <span className="circle current-page"/>
+                <span className="circle"/>
+            </div>
         </section>
     );
 }

@@ -65,10 +65,10 @@ export default function CreateMemberPage() {
         if (response.status === 200) {
             response.json()
                 .then(value => setUserId(value.userId));
-        }else if (response.status === 400) {
+        } else if (response.status === 400) {
             response.json()
                 .then(value => handleValidationErrorsAfterSubmit(value));
-        }else{
+        } else {
             setServerError(true);
         }
 
@@ -120,7 +120,8 @@ export default function CreateMemberPage() {
 
                 <button className="submit" data-testid="SubmitButton" onClick={handleSubmit}>Submit</button>
 
-                <p className={serverError ? "server-error visible" : "server-error"}>Error submitting your request. Please try again later</p>
+                <p className={serverError ? "server-error visible" : "server-error"}>Error submitting your request.
+                    Please try again later</p>
             </div>
         </section>
     );

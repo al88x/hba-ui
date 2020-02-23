@@ -2,4 +2,7 @@
 
 .confirm-page-one {
   @include form();
+
+  @include circle-pagination();
+
 }

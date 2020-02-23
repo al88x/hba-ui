@@ -21,7 +21,7 @@ export default function CreateMemberPage() {
         email: ""
     };
 
-    const {handleChange, handleSubmit, values, errors, handleErrorsAfterSubmit} = useForm(submit, validateCreateMemberForm, valuesInitialState);
+    const {handleChange, handleSubmit, values, errors, handleValidationErrorsAfterSubmit} = useForm(submit, validateCreateMemberForm, valuesInitialState);
     const [userId, setUserId] = useState(-1);
     const [serverError, setServerError] = useState(false);
 
@@ -67,7 +67,7 @@ export default function CreateMemberPage() {
                 .then(value => setUserId(value.userId));
         }else if (response.status === 400) {
             response.json()
-                .then(value => handleErrorsAfterSubmit(value));
+                .then(value => handleValidationErrorsAfterSubmit(value));
         }else{
             setServerError(true);
         }

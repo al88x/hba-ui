@@ -1,0 +1,19 @@
+@import "src/styles/general-styling";
+
+.confirm-page-three {
+  @include form();
+
+  select{
+    padding: 5px;
+    margin-top: 5px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    &:hover{
+      cursor:pointer;
+    }
+  }
+  .invalid-select{
+    border: 2px solid tomato;
+  }
+}

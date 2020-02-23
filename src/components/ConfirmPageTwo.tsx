@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {useForm} from "../helpers/useForm";
 import {savePasswordsToDatabase} from "../helpers/AsyncJsonFetcher";
 import {ConfirmPageThree} from "./ConfirmPageThree";
@@ -17,9 +17,8 @@ interface IConfirmPageTwo {
 export function ConfirmPageTwo(props: IConfirmPageProps) {
 
     const valuesInitialState = {password: "", confirmPassword: ""};
-    const {handleChange, handleSubmit, values, errors, handleErrorsAfterSubmit} = useForm(submit, validateConfirmPageTwoForm, valuesInitialState);
-    const [submittedSuccessfully, setSubmittedSuccessfully] = useState(false);
-    const [serverError, setServerError] = useState(false);
+    const {handleChange, handleSubmit, values, errors,serverError, submittedSuccessfully, setServerError, setSubmittedSuccessfully} = useForm(submit, validateConfirmPageTwoForm, valuesInitialState);
+
 
     function validateConfirmPageTwoForm(values: IConfirmPageTwo) {
         let errors = {hasErrors: false, password: "", confirmPassword: ""};
@@ -57,7 +56,7 @@ export function ConfirmPageTwo(props: IConfirmPageProps) {
     return (
         <section className="confirm-page-two">
             <h1>Set up password</h1>
-            <div>
+
                 <label>Password</label>
                 <input className={`${errors.password ? "input invalid" : "input"}`} data-testid="Password"
                        type="password"
@@ -78,7 +77,7 @@ export function ConfirmPageTwo(props: IConfirmPageProps) {
 
                 <p className={serverError ? "server-error visible" : "server-error"}>Error submitting your request.
                     Please try again later</p>
-            </div>
+
         </section>
     );
 }

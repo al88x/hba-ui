@@ -101,5 +101,18 @@ export async function savePasswordsToDatabase(data:string){
         });
 }
 
+export async function saveMemberDetails(data:string){
+    return await fetch("http://localhost:8080/register/confirm/pageThree", {
+        credentials: "include",
+        mode: 'cors',
+        method: 'POST',
+        headers: {'Access-Control-Allow-Origin': 'http://localhost:3000', 'Content-Type': 'application/json'},
+        body: data
+    })
+        .then(response => {
+            return response.ok ? response : Promise.reject();
+        });
+}
+
 
 

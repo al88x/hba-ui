@@ -1,8 +1,8 @@
 import React from "react";
-import {useForm} from "../helpers/useForm";
-import {savePasswordsToDatabase} from "../helpers/AsyncJsonFetcher";
+import {useForm} from "../../helpers/useForm";
+import {savePasswordsToDatabase} from "../../helpers/AsyncJsonFetcher";
 import {ConfirmPageThree} from "./ConfirmPageThree";
-import "../styles/ConfirmationPageTwo.scss"
+import "../../styles/ConfirmationPageTwo.scss"
 
 
 export interface IConfirmPageProps {

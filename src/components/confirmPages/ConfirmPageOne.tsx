@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import {getMemberIdFromToken, isEmployeeNumberValid} from "../helpers/AsyncJsonFetcher";
-import PageNotFound from "./PageNotFound";
-import {useForm} from "../helpers/useForm";
+import {getMemberIdFromToken, isEmployeeNumberValid} from "../../helpers/AsyncJsonFetcher";
+import PageNotFound from "../PageNotFound";
+import {useForm} from "../../helpers/useForm";
 import {ConfirmPageTwo} from "./ConfirmPageTwo";
-import "../styles/ConfirmationPageOne.scss"
+import "../../styles/ConfirmationPageOne.scss"
 
 
 interface IMemberDetails {

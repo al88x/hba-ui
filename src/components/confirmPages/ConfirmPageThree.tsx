@@ -1,8 +1,8 @@
 import React from "react";
+import {useForm} from "../../helpers/useForm";
+import "../../styles/ConfirmPageThree.scss"
+import {saveMemberDetails} from "../../helpers/AsyncJsonFetcher";
 import {IConfirmPageProps} from "./ConfirmPageTwo";
-import {useForm} from "../helpers/useForm";
-import "../styles/ConfirmPageThree.scss"
-import {saveMemberDetails} from "../helpers/AsyncJsonFetcher";
 
 
 interface IConfirmPageThree {

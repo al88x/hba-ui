@@ -124,5 +124,15 @@ export async function logout() {
         });
 }
 
+export async function sendPasswordResetEmail(email:string){
+    return await fetch(`http://localhost:8080/forgot-password?email=${email}`,
+        {
+            method: 'GET',
+            credentials: "include",
+            mode: 'cors',
+            headers: {"Content-Type": "application/json"},
+        });
+}
+
 
 

@@ -10,7 +10,8 @@ import {Navbar} from "./components/navbar/Navbar";
 import {MembersPage} from "./components/MembersPage";
 import CreateMemberPage from "./components/CreateMemberPage";
 import {MemberDetailsPage} from "./components/MemberDetailsPage";
-import {ConfirmPageOne} from "./components/ConfirmPageOne";
+import {ConfirmPageOne} from "./components/confirmPages/ConfirmPageOne";
+import {ForgotPasswordPage} from "./components/ForgotPasswordPage";
 
 const App: React.FC = () => {
     return (
@@ -20,6 +21,8 @@ const App: React.FC = () => {
                 <Switch>
                     <Route exact path="/" component={LoginPage}/>
                     <Route exact path={"/confirm/:token"} component={ConfirmPageOne}/>
+                    <Route exact path={"/forgot-password"} component={ForgotPasswordPage}/>
+
                     <ProtectedRoute exact path={"/admin"} component={AdminPage} roleFilter="ADMIN"/>
                     <ProtectedRoute exact path={"/admin/members"} component={MembersPage} roleFilter="ADMIN"/>
                     <ProtectedRoute exact path={"/admin/members/create"} component={CreateMemberPage} roleFilter="ADMIN"/>

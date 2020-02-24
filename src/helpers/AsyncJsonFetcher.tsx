@@ -62,7 +62,7 @@ export async function getMemberList() {
 }
 
 export async function getMemberIdFromToken(token: string) {
-     return await fetch(`http://localhost:8080/register/confirm?token=${token}`,
+    return await fetch(`http://localhost:8080/register/confirm?token=${token}`,
         {
             method: 'GET',
             credentials: "include",
@@ -70,12 +70,12 @@ export async function getMemberIdFromToken(token: string) {
             headers: {"Content-Type": "application/json"},
         })
         .then(response => {
-        return response.ok ? response.json() : Promise.reject("Invalid Token");
-    });
+            return response.ok ? response.json() : Promise.reject("Invalid Token");
+        });
 
 }
 
-export async function isEmployeeNumberValid(token: string, employeeNumber:string) {
+export async function isEmployeeNumberValid(token: string, employeeNumber: string) {
     return await fetch(`http://localhost:8080/register/confirm?token=${token}&employeeNumber=${employeeNumber}`,
         {
             method: 'GET',
@@ -88,7 +88,7 @@ export async function isEmployeeNumberValid(token: string, employeeNumber:string
         });
 }
 
-export async function savePasswordsToDatabase(data:string){
+export async function savePasswordsToDatabase(data: string) {
     return await fetch("http://localhost:8080/register/confirm/pageTwo", {
         credentials: "include",
         mode: 'cors',
@@ -101,7 +101,7 @@ export async function savePasswordsToDatabase(data:string){
         });
 }
 
-export async function saveMemberDetails(data:string){
+export async function saveMemberDetails(data: string) {
     return await fetch("http://localhost:8080/register/confirm/pageThree", {
         credentials: "include",
         mode: 'cors',
@@ -111,6 +111,16 @@ export async function saveMemberDetails(data:string){
     })
         .then(response => {
             return response.ok ? response : Promise.reject();
+        });
+}
+
+export async function logout() {
+    return await fetch("http://localhost:8080/logout",
+        {
+            method: 'GET',
+            credentials: "include",
+            mode: 'cors',
+            headers: {"Content-Type": "application/json"},
         });
 }
 

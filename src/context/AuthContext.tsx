@@ -2,10 +2,10 @@ import React, {ReactNode, useEffect, useReducer} from "react";
 import {asyncGetUserDetails} from "../helpers/AsyncJsonFetcher";
 
 interface IAuthContextProviderProps {
-    isLoggedIn?:boolean,
-    isContextLoaded?:boolean,
-    username?:string,
-    role?:string
+    isLoggedIn?: boolean,
+    isContextLoaded?: boolean,
+    username?: string,
+    role?: string
     children: ReactNode
 }
 
@@ -40,7 +40,9 @@ function reducer(state: IState, action: IAction): IState {
                 username: action.payload.username
             }
         );
-    } else {
+    } else if(action.type === 'LOG_OUT'){
+        return (initialState);
+    } else{
         return state;
     }
 }
@@ -55,10 +57,11 @@ export function AuthContextProvider(props: IAuthContextProviderProps) {
     const [state, dispatch] = useReducer(reducer, initialState);
 
     useEffect(() => {
-            asyncGetUserDetails()
-                .then(jsonResponse => {
-                    dispatch({type: "FETCH_USER", payload: jsonResponse})})
-    }, [state]);
+        asyncGetUserDetails()
+            .then(jsonResponse => {
+                dispatch({type: "FETCH_USER", payload: jsonResponse})
+            })
+    }, [state.isContextLoaded]);
 
     return (
         <AuthContext.Provider value={{state, dispatch}}>

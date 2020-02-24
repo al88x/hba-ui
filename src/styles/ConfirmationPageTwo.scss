@@ -1,0 +1,6 @@
+@import "src/styles/general-styling";
+
+.confirm-page-two {
+  @include form();
+  @include circle-pagination();
+}

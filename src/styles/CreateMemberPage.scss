@@ -29,8 +29,18 @@
     color:tomato;
   }
 
-
   .invalid{
     border-bottom: 1px solid tomato;
+  }
+
+  .server-error{
+    background: rgba(255, 99, 71, 0.3);
+    border: 1px solid tomato;
+    color:tomato;
+    display: none;
+    padding:15px;
+  }
+  .visible{
+    display: block;
   }
 }

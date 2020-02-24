@@ -10,6 +10,7 @@ import {Navbar} from "./components/navbar/Navbar";
 import {MembersPage} from "./components/MembersPage";
 import CreateMemberPage from "./components/CreateMemberPage";
 import {MemberDetailsPage} from "./components/MemberDetailsPage";
+import {ConfirmPageOne} from "./components/ConfirmPageOne";
 
 const App: React.FC = () => {
     return (
@@ -18,6 +19,7 @@ const App: React.FC = () => {
                 <Navbar/>
                 <Switch>
                     <Route exact path="/" component={LoginPage}/>
+                    <Route exact path={"/confirm/:token"} component={ConfirmPageOne}/>
                     <ProtectedRoute exact path={"/admin"} component={AdminPage} roleFilter="ADMIN"/>
                     <ProtectedRoute exact path={"/admin/members"} component={MembersPage} roleFilter="ADMIN"/>
                     <ProtectedRoute exact path={"/admin/members/create"} component={CreateMemberPage} roleFilter="ADMIN"/>
@@ -29,7 +31,7 @@ const App: React.FC = () => {
             </Router>
         </AuthContextProvider>
     );
-}
+};
 
 export interface ProtectedRouteProps extends RouteProps {
     roleFilter: String;

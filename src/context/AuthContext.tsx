@@ -58,8 +58,7 @@ export function AuthContextProvider(props: IAuthContextProviderProps) {
             asyncGetUserDetails()
                 .then(jsonResponse => {
                     dispatch({type: "FETCH_USER", payload: jsonResponse})})
-
-    }, []);
+    }, [state]);
 
     return (
         <AuthContext.Provider value={{state, dispatch}}>

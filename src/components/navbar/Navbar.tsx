@@ -1,10 +1,21 @@
-import React, {useContext} from "react";
-import {Link} from "react-router-dom";
+import React, {useContext, useState} from "react";
+import {Link, Redirect} from "react-router-dom";
 import {AuthContext} from "../../context/AuthContext";
 import "../../styles/Navbar.scss"
+import {logout} from "../../helpers/AsyncJsonFetcher";
 
 export function Navbar() {
     const context = useContext(AuthContext);
+    const[loggedOut, setLoggedOut] = useState(false);
+
+    function handleLogOut(){
+        logout()
+            .then(()=> context.dispatch({type: "LOG_OUT"}));
+    }
+
+    if(loggedOut){
+        return <Redirect to={"/"}/>;
+    }
 
     if (context.state.role === "ADMIN") {
         return (
@@ -18,7 +29,7 @@ export function Navbar() {
                     </div>
                 </div>
                 <div className="logOut">
-                    <Link to="/" className="nav-element">Log Out</Link>
+                    <Link to="/" className="nav-element" onClick={handleLogOut}>Log Out</Link>
                 </div>
             </nav>
         );

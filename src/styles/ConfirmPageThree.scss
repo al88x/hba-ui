@@ -1,21 +1,45 @@
 @import "src/styles/general-styling";
 
 .confirm-page-three {
+  position: relative;
   @include form();
   @include circle-pagination();
 
 
-  select{
+  select {
     padding: 5px;
     margin-top: 5px;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    &:hover{
-      cursor:pointer;
+
+    &:hover {
+      cursor: pointer;
     }
   }
-  .invalid-select{
+
+  .invalid-select {
     border: 2px solid tomato;
   }
+
 }
+
+.account-created{
+  margin-bottom: 5px;
+  text-align: center;
+  font-size: 1em;
+  color: #333333;
+}
+
+.homepage-link{
+
+  font-size: 1em;
+  color:#333333;
+  &:hover{
+    color:white;
+  }
+}
+.invisible{
+  display: none;
+}
+

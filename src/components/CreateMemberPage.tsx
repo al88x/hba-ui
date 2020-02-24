@@ -81,7 +81,7 @@ export default function CreateMemberPage() {
     return (
         <section className="create-member-page">
             <h1>Create member</h1>
-            <div>
+            <form onSubmit={event => {event.preventDefault(); handleSubmit();}}>
                 <label>First Name</label>
                 <input className={`${errors.firstName ? "input invalid" : "input"}`}
                        type="text"
@@ -122,7 +122,7 @@ export default function CreateMemberPage() {
 
                 <p className={serverError ? "server-error visible" : "server-error"}>Error submitting your request.
                     Please try again later</p>
-            </div>
+            </form>
         </section>
     );
 }

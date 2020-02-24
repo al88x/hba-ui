@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useState} from "react";
 import "../styles/LoginPage.scss"
 import {Redirect} from 'react-router-dom';
 import {asyncJSONPostFetch, asyncGetUserDetails} from "../helpers/AsyncJsonFetcher";
@@ -7,27 +7,27 @@ import {useForm} from "../helpers/useForm";
 
 
 interface ILoginForm {
-    username:string,
-    password:string
+    username: string,
+    password: string
 }
 
 export function LoginPage() {
-    const valuesInitialState:ILoginForm ={username: "", password: ""};
+    const valuesInitialState: ILoginForm = {username: "", password: ""};
     const {handleChange, handleSubmit, values, errors} = useForm(submit, validateLoginForm, valuesInitialState);
     const [invalidCredentials, setInvalidCredentials] = useState(false);
     const context = useContext(AuthContext);
 
-    function validateLoginForm(values:ILoginForm){
-        let errors = {hasErrors:false, username:"", password:""};
-        if(!values.username){
+    function validateLoginForm(values: ILoginForm) {
+        let errors = {hasErrors: false, username: "", password: ""};
+        if (!values.username) {
             errors.username = "Username should not be empty";
             errors.hasErrors = true;
         }
-        if(!values.password){
+        if (!values.password) {
             errors.password = "Password should not be empty";
             errors.hasErrors = true;
         }
-        if(errors.hasErrors){
+        if (errors.hasErrors) {
             return errors;
         }
         return {};
@@ -62,7 +62,7 @@ export function LoginPage() {
     return (
         <section className="loginPage">
             <h1>Login</h1>
-            <form method="post" data-testid="LoginForm" onSubmit={event => {event.preventDefault();handleSubmit()}}>
+            <form data-testid="LoginForm" onSubmit={event => {event.preventDefault();handleSubmit();}}>
                 <label>Username</label>
                 <input className="input" type="text" data-testid="Username"
                        name="username"
@@ -80,11 +80,11 @@ export function LoginPage() {
                    className={invalidCredentials ? "wrong-credentials visible" : "wrong-credentials"}>Invalid Username
                     or Password</p>
             </form>
-                <div className="login-forgot-container">
-                    <button className="submit" data-testid="SubmitButton" onClick={handleSubmit}>Submit</button>
-                    <a href="/forgot-password" className="forgot-password" data-testid="ForgotPassword">Forgot
-                        password</a>
-                </div>
+            <div className="login-forgot-container">
+                <button className="submit" data-testid="SubmitButton" onClick={handleSubmit}>Submit</button>
+                <a href="/forgot-password" className="forgot-password" data-testid="ForgotPassword">Forgot
+                    password</a>
+            </div>
         </section>
     );
 }

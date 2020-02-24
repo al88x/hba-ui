@@ -3,7 +3,6 @@ import {IConfirmPageProps} from "./ConfirmPageTwo";
 import {useForm} from "../helpers/useForm";
 import "../styles/ConfirmPageThree.scss"
 import {saveMemberDetails} from "../helpers/AsyncJsonFetcher";
-import { Redirect } from "react-router-dom";
 
 
 interface IConfirmPageThree {
@@ -50,10 +49,6 @@ export function ConfirmPageThree(props: IConfirmPageProps) {
             .catch(()=>setServerError(true))
     }
 
-    if(submittedSuccessfully){
-        return <Redirect to={"/user"}/>
-    }
-
     return (
         <section className="confirm-page-three">
             <h1>Employee details</h1>
@@ -98,6 +93,10 @@ export function ConfirmPageThree(props: IConfirmPageProps) {
 
             <button className="submit" data-testid="SubmitButton" onClick={handleSubmit}>Submit</button>
 
+            <div className={submittedSuccessfully ? "submit" : "submit invisible"}>
+                <p className="account-created">Account successfully created.</p>
+                <a href="/" className="homepage-link">Go to Homepage</a>
+            </div>
             <p className={serverError ? "server-error visible" : "server-error"}>Error submitting your request. Please
                 try again later</p>
 
@@ -106,6 +105,7 @@ export function ConfirmPageThree(props: IConfirmPageProps) {
                 <span className="circle"/>
                 <span className="circle current-page"/>
             </div>
+
         </section>
     );
 }

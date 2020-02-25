@@ -29,7 +29,7 @@ export function ConfirmPageOne() {
                 .then(value => setMemberDetails(value))
                 .catch(() => setError(true));
         }
-    }, []);
+    }, [token]);
 
     function validateConfirmPageOneForm(values: IConfirmPageOne) {
         let errors = {hasErrors: false, employeeNumber: ""};

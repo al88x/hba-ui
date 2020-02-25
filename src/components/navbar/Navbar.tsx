@@ -6,30 +6,27 @@ import {logout} from "../../helpers/AsyncJsonFetcher";
 
 export function Navbar() {
     const context = useContext(AuthContext);
-    const[loggedOut, setLoggedOut] = useState(false);
 
-    function handleLogOut(){
+    function handleLogOut() {
         logout()
-            .then(()=> context.dispatch({type: "LOG_OUT"}));
-    }
-
-    if(loggedOut){
-        return <Redirect to={"/"}/>;
+            .then(() => context.dispatch({type: "LOG_OUT"}));
     }
 
     if (context.state.role === "ADMIN") {
         return (
             <nav>
-                <div className="main-nav-elements">
-                    <div>
-                        <Link to="/admin" className="nav-element">Home</Link>
+                <div className="nav-container">
+                    <div className="main-nav-elements">
+                        <div>
+                            <Link to="/admin" className="nav-element">Home</Link>
+                        </div>
+                        <div>
+                            <Link to="/admin/members" className="nav-element">Members</Link>
+                        </div>
                     </div>
-                    <div>
-                        <Link to="/admin/members" className="nav-element">Members</Link>
+                    <div className="logOut">
+                        <Link to="/" className="nav-element" onClick={handleLogOut}>Log Out</Link>
                     </div>
-                </div>
-                <div className="logOut">
-                    <Link to="/" className="nav-element" onClick={handleLogOut}>Log Out</Link>
                 </div>
             </nav>
         );

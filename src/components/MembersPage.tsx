@@ -30,8 +30,8 @@ export function MembersPage() {
     const [notFoundMessage, setNotFoundMessage] = useState("");
 
     useEffect(() => {
-            getMemberList()
-                .then(jsonResponse => setMembers(jsonResponse.items));
+        getMemberList()
+            .then(jsonResponse => setMembers(jsonResponse.items));
     }, []);
 
     function validateSearchForm(values: ISearchForm) {
@@ -60,7 +60,7 @@ export function MembersPage() {
         <div className="members-page">
             <div className="createUser-form-container">
 
-                <a href="/admin/members/create" className="create-member">Create member</a>
+                <a href="/admin/members/create" className="create-member">+</a>
 
                 <form className="search-form" onSubmit={event => {
                     event.preventDefault();
@@ -101,13 +101,12 @@ export function MembersPage() {
                 </button>
             </div>
 
-            <ul>
+            <ul className="members-list">
                 {members.map(member => (
                     <li key={member.id}>
                         <a className="member-container" href={`members/${member.id}`}>
                             <p className="member-name">{member.firstName} {member.lastName}</p>
                             <p className="member-username">({member.username})</p>
-
                         </a>
                     </li>
                 ))}

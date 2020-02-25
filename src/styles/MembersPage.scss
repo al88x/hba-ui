@@ -1,9 +1,9 @@
 @import "src/styles/general-styling";
+
 .members-page {
   padding: 20px 0;
   width: 100%;
-  max-width: 600px;
-  background-color: white;
+  max-width: $max-width;
   margin: auto;
 }
 
@@ -13,21 +13,24 @@
 }
 
 .create-member {
-  border: 1px solid gray;
-  margin-top: 10px;
-  padding: 10px;
-  font-size: 0.7em;
-  text-align: center;
-  color: gray;
-  &:hover{
-
+  height: 65px;
+  border-right: 1px solid gray;
+  line-height: 55px;
+  font-size: 4em;
+  color: white;
+  padding: 0 15px;
+  opacity: 0.5;
+  &:hover {
     cursor: pointer;
-    border: 1px solid $accent-color
+    border: 1px solid white;
+    transition: opacity 0.5s;
+    opacity: 1;
+
   }
 }
 
 .search-form {
-  margin:10px;
+  margin: 10px;
 }
 
 
@@ -38,7 +41,6 @@
   display: flex;
   align-content: center;
   border: 1px solid gray;
-  //margin: 10px;
 }
 
 
@@ -47,14 +49,13 @@
   font-size: 0.7em;
   color: tomato;
 }
-.invisible{
+
+.invisible {
   display: none;
 }
 
 
-
-
-.radio-container{
+.radio-container {
   margin-top: 5px;
 }
 
@@ -64,7 +65,7 @@
   padding-left: 20px;
   cursor: pointer;
   font-size: 0.8em;
-  color: gray;
+  color: white;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -80,11 +81,12 @@
 .search-button {
   margin-top: 7px;
   opacity: 0.5;
+  fill: white;
 
   &:hover {
     cursor: pointer;
     transition: opacity 0.5s;
-    opacity: 0.8;
+    opacity: 1;
   }
 
 }
@@ -99,27 +101,31 @@
   }
 }
 
-.member-container{
+.members-list{
+  margin: 20px 10px;
+}
+
+.member-container {
   display: flex;
-  border-top: 0.5px solid gray;
-  border-bottom: 0.5px solid gray;
-  margin: 5px;
-  padding: 5px;
-  font-size: 1em;
-  &:hover{
+  background-color: rgba(white, 0.1);
+  padding: 10px;
+  margin:10px;
+  font-size: 1.2em;
+
+  &:hover {
     cursor: pointer;
-    border-top: 0.5 solid $accent-color;
-    font-size: 1.2em;
+    background-color: rgba(white, 0.2);
+    font-size: 1.5em;
   }
 }
 
-.member-name{
-  color: black;
+.member-name {
+  color: white;
 }
 
-.member-username{
-  margin-left: 10px;
-  color: gray;
+.member-username {
+  margin-left: 15px;
+  color: darkgray;
   font-size: 0.9em;
 }
 

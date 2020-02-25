@@ -88,7 +88,7 @@ export async function isEmployeeNumberValid(token: string, employeeNumber: strin
         });
 }
 
-export async function savePasswordsToDatabase(data: string) {
+export async function savePasswordToDatabase(data: string) {
     return await fetch("http://localhost:8080/register/confirm/pageTwo", {
         credentials: "include",
         mode: 'cors',
@@ -132,6 +132,15 @@ export async function sendPasswordResetEmail(email:string){
             mode: 'cors',
             headers: {"Content-Type": "application/json"},
         });
+}
+export async function resetPassword(data: string) {
+    return await fetch("http://localhost:8080/reset-password", {
+        credentials: "include",
+        mode: 'cors',
+        method: 'POST',
+        headers: {'Access-Control-Allow-Origin': 'http://localhost:3000', 'Content-Type': 'application/json'},
+        body: data
+    });
 }
 
 

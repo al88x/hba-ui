@@ -1,26 +1,30 @@
-import React from "react";
+import React, {useState} from "react";
 import {useForm} from "../../helpers/useForm";
-import {savePasswordsToDatabase} from "../../helpers/AsyncJsonFetcher";
+import {resetPassword, savePasswordToDatabase} from "../../helpers/AsyncJsonFetcher";
 import {ConfirmPageThree} from "./ConfirmPageThree";
-import "../../styles/ConfirmationPageTwo.scss"
+import "../../styles/PasswordSetUpPage.scss"
+import {useParams} from "react-router-dom";
 
-
-export interface IConfirmPageProps {
-    token: string
+export enum SetupPasswordMethod {
+    NEW, RESET
 }
 
-interface IConfirmPageTwo {
+export interface IPasswordSetUpPageProps {
+    account: SetupPasswordMethod;
+}
+
+interface IPasswordSetUpPage {
     password: string,
     confirmPassword: string
 }
 
-export function ConfirmPageTwo(props: IConfirmPageProps) {
-
+export function PasswordSetUpPage(props: IPasswordSetUpPageProps) {
+    const {token} = useParams();
     const valuesInitialState = {password: "", confirmPassword: ""};
-    const {handleChange, handleSubmit, values, errors, serverError, submittedSuccessfully, setServerError, setSubmittedSuccessfully} = useForm(submit, validateConfirmPageTwoForm, valuesInitialState);
+    const {handleChange, handleSubmit, values, errors, serverError, submittedSuccessfully, setServerError, setSubmittedSuccessfully} = useForm(submit, validatePasswordSetUpForm, valuesInitialState);
+    const [passwordChanged, setPasswordChanged] = useState(false);
 
-
-    function validateConfirmPageTwoForm(values: IConfirmPageTwo) {
+    function validatePasswordSetUpForm(values: IPasswordSetUpPage) {
         let errors = {hasErrors: false, password: "", confirmPassword: ""};
         const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
         if (!passwordRegex.test(values.password)) {
@@ -32,7 +36,7 @@ export function ConfirmPageTwo(props: IConfirmPageProps) {
         }
         if (values.confirmPassword !== values.password) {
             errors.password = "Password must be equal with confirmPassword";
-            errors.confirmPassword = "Password must be equal with confirmPassword"
+            errors.confirmPassword = "Password must be equal with confirmPassword";
             errors.hasErrors = true;
         }
         if (errors.hasErrors) {
@@ -42,16 +46,25 @@ export function ConfirmPageTwo(props: IConfirmPageProps) {
     }
 
     function submit() {
-        const data = {token: props.token, password: values.password};
-        savePasswordsToDatabase(JSON.stringify(data))
-            .then(() => setSubmittedSuccessfully(true))
-            .catch(() => setServerError(true))
+        console.log(props.account);
+        console.log(token);
+        const data = {token: token, password: values.password};
+        if (props.account === SetupPasswordMethod.NEW) {
+            savePasswordToDatabase(JSON.stringify(data))
+                .then(() => setSubmittedSuccessfully(true))
+                .catch(() => setServerError(true));
+        }
+        if(props.account === SetupPasswordMethod.RESET){
+            resetPassword(JSON.stringify(data))
+                .then(() => setPasswordChanged(true))
+                .catch(() => setServerError(true));
+        }
     }
 
     if (submittedSuccessfully) {
-        return <ConfirmPageThree token={props.token}/>
-    }
+            return <ConfirmPageThree/>
 
+    }
 
     return (
         <section className="confirm-page-two">
@@ -73,12 +86,18 @@ export function ConfirmPageTwo(props: IConfirmPageProps) {
                    onChange={handleChange}/>
             <p className={`${errors.confirmPassword && "error"}`}>{errors.confirmPassword}</p>
 
-            <button className="submit" data-testid="SubmitButton" onClick={handleSubmit}>Submit</button>
+            <button className={passwordChanged ? "submit invisible" : "submit"} data-testid="SubmitButton" onClick={handleSubmit}>Submit</button>
+
+            <div className={passwordChanged ? "submit" : "submit invisible"}>
+                <p className="successful-message">Account successfully created.</p>
+                <a href="/" className="homepage-link">Go to Homepage</a>
+            </div>
+
 
             <p className={serverError ? "server-error visible" : "server-error"}>Error submitting your request.
                 Please try again later</p>
 
-            <div className="circle-container">
+            <div className={props.account === SetupPasswordMethod.NEW ? "circle-container" : "invisible"}>
                 <span className="circle"/>
                 <span className="circle current-page"/>
                 <span className="circle"/>

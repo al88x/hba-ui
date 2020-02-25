@@ -3,7 +3,7 @@ import {useParams} from "react-router-dom";
 import {getMemberIdFromToken, isEmployeeNumberValid} from "../../helpers/AsyncJsonFetcher";
 import PageNotFound from "../PageNotFound";
 import {useForm} from "../../helpers/useForm";
-import {ConfirmPageTwo} from "./ConfirmPageTwo";
+import {PasswordSetUpPage, SetupPasswordMethod} from "./PasswordSetUpPage";
 import "../../styles/ConfirmationPageOne.scss"
 
 
@@ -54,8 +54,8 @@ export function ConfirmPageOne() {
         }
     }
 
-    if (validEmployeeNumber && token) {
-        return <ConfirmPageTwo token={token}/>;
+    if (validEmployeeNumber) {
+        return <PasswordSetUpPage account={SetupPasswordMethod.NEW}/>;
     }
 
     if (error) {

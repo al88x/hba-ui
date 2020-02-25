@@ -21,25 +21,8 @@
   .invalid-select {
     border: 2px solid tomato;
   }
-
 }
+@include successful-message-button();
 
-.account-created{
-  margin-bottom: 5px;
-  text-align: center;
-  font-size: 1em;
-  color: #333333;
-}
 
-.homepage-link{
-
-  font-size: 1em;
-  color:#333333;
-  &:hover{
-    color:white;
-  }
-}
-.invisible{
-  display: none;
-}
 

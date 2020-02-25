@@ -1,8 +1,8 @@
 import React from "react";
-import {IConfirmPageProps} from "./ConfirmPageTwo";
-import {useForm} from "../helpers/useForm";
-import "../styles/ConfirmPageThree.scss"
-import {saveMemberDetails} from "../helpers/AsyncJsonFetcher";
+import {useForm} from "../../helpers/useForm";
+import "../../styles/ConfirmPageThree.scss"
+import {saveMemberDetails} from "../../helpers/AsyncJsonFetcher";
+import { useParams } from "react-router-dom";
 
 
 interface IConfirmPageThree {
@@ -12,7 +12,8 @@ interface IConfirmPageThree {
     area:string
 }
 
-export function ConfirmPageThree(props: IConfirmPageProps) {
+export function ConfirmPageThree() {
+    const {token} = useParams();
 
     const valuesInitialState: IConfirmPageThree = {shift:"", jobRole:"", department:"", area:""};
     const {handleChange, handleSubmit, values, errors, serverError, setServerError, submittedSuccessfully, setSubmittedSuccessfully} = useForm(submit, validateCreateMemberForm, valuesInitialState);
@@ -43,7 +44,7 @@ export function ConfirmPageThree(props: IConfirmPageProps) {
     }
 
     function submit() {
-        const data = {token: props.token, shift: values.shift, jobRole:values.jobRole, department:values.department, area:values.area};
+        const data = {token: token, shift: values.shift, jobRole:values.jobRole, department:values.department, area:values.area};
         saveMemberDetails(JSON.stringify(data))
             .then(()=> setSubmittedSuccessfully(true))
             .catch(()=>setServerError(true))
@@ -91,10 +92,10 @@ export function ConfirmPageThree(props: IConfirmPageProps) {
             </select>
             <p className={`${errors.area && "error"}`}>{errors.area}</p>
 
-            <button className="submit" data-testid="SubmitButton" onClick={handleSubmit}>Submit</button>
+            <button className={submittedSuccessfully ? "submit invisible" : "submit"} data-testid="SubmitButton" onClick={handleSubmit}>Submit</button>
 
             <div className={submittedSuccessfully ? "submit" : "submit invisible"}>
-                <p className="account-created">Account successfully created.</p>
+                <p className="successful-message">Account successfully created.</p>
                 <a href="/" className="homepage-link">Go to Homepage</a>
             </div>
             <p className={serverError ? "server-error visible" : "server-error"}>Error submitting your request. Please

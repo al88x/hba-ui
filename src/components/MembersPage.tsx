@@ -27,12 +27,17 @@ export function MembersPage() {
     };
     const {handleChange, handleSubmit, values, errors} = useForm(submit, validateSearchForm, valuesInitialState);
     const [members, setMembers] = useState<IMember[]>([]);
+    const [pageToGo, setPageToGo] = useState("/members?page=1&pageSize=10");
+    const [nextPage, setNextPage] = useState("");
+    const [previousPage, setPreviousPage] = useState("");
     const [notFoundMessage, setNotFoundMessage] = useState("");
 
     useEffect(() => {
-        getMemberList()
+        getMemberList(pageToGo)
+            .then(jsonResponse => {setNextPage(jsonResponse.nextPage); return jsonResponse;})
+            .then(jsonResponse => {setPreviousPage(jsonResponse.previousPage); return jsonResponse;})
             .then(jsonResponse => setMembers(jsonResponse.items));
-    }, []);
+    }, [pageToGo]);
 
     function validateSearchForm(values: ISearchForm) {
         let errors = {hasErrors: false, searchValue: ""};
@@ -111,6 +116,10 @@ export function MembersPage() {
                     </li>
                 ))}
             </ul>
+            <div className="next-previous-page-container">
+                <button className={previousPage != null ? "next-previous-page-button" : "invisible"}  onClick={()=> setPageToGo(previousPage)}>Previous</button>
+                <button className={nextPage != null ? "next-previous-page-button right" : "invisible"}  onClick={()=> setPageToGo(nextPage)}>Next</button>
+            </div>
         </div>
     );
 }

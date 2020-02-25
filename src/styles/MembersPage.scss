@@ -5,127 +5,163 @@
   width: 100%;
   max-width: $max-width;
   margin: auto;
-}
 
-.createUser-form-container {
-  display: flex;
-  justify-content: center;
-}
 
-.create-member {
-  height: 65px;
-  border-right: 1px solid gray;
-  line-height: 55px;
-  font-size: 4em;
-  color: white;
-  padding: 0 15px;
-  opacity: 0.5;
-  &:hover {
+  .createUser-form-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .create-member {
+    height: 65px;
+    border-right: 1px solid gray;
+    line-height: 55px;
+    font-size: 4em;
+    color: white;
+    padding: 0 15px;
+    opacity: 0.5;
+
+    &:hover {
+      cursor: pointer;
+      border: 1px solid white;
+      transition: opacity 0.5s;
+      opacity: 1;
+
+    }
+  }
+
+  .search-form {
+    margin: 10px;
+  }
+
+
+  .members-page-search {
+    padding-left: 10px;
+    width: 200px;
+    height: 25px;
+    display: flex;
+    align-content: center;
+    border: 1px solid gray;
+  }
+
+
+  .error-message {
+    margin-top: 5px;
+    font-size: 0.7em;
+    color: tomato;
+  }
+
+  .invisible {
+    display: none;
+  }
+
+
+  .radio-container {
+    margin-top: 5px;
+  }
+
+  .radio-label {
+    margin-right: 10px;
+    position: relative;
+    padding-left: 20px;
     cursor: pointer;
-    border: 1px solid white;
-    transition: opacity 0.5s;
-    opacity: 1;
-
-  }
-}
-
-.search-form {
-  margin: 10px;
-}
-
-
-.members-page-search {
-  padding-left: 10px;
-  width: 200px;
-  height: 25px;
-  display: flex;
-  align-content: center;
-  border: 1px solid gray;
-}
-
-
-.error-message {
-  margin-top: 5px;
-  font-size: 0.7em;
-  color: tomato;
-}
-
-.invisible {
-  display: none;
-}
-
-
-.radio-container {
-  margin-top: 5px;
-}
-
-.radio-label {
-  margin-right: 10px;
-  position: relative;
-  padding-left: 20px;
-  cursor: pointer;
-  font-size: 0.8em;
-  color: white;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.radio-button {
-  position: absolute;
-  left: 0;
-  padding: 0;
-}
-
-.search-button {
-  margin-top: 7px;
-  opacity: 0.5;
-  fill: white;
-
-  &:hover {
-    cursor: pointer;
-    transition: opacity 0.5s;
-    opacity: 1;
+    font-size: 0.8em;
+    color: white;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 
-}
-
-.submit-button {
-  background: none;
-  border: none;
-  height: 25px;
-  padding: 0;
-  &:focus {
-    outline: 0;
+  .radio-button {
+    position: absolute;
+    left: 0;
+    padding: 0;
   }
-}
 
-.members-list{
-  margin: 20px 10px;
-}
+  .search-button {
+    margin-top: 7px;
+    opacity: 0.5;
+    fill: white;
 
-.member-container {
-  display: flex;
-  background-color: rgba(white, 0.1);
-  padding: 10px;
-  margin:10px;
-  font-size: 1.2em;
+    &:hover {
+      cursor: pointer;
+      transition: opacity 0.5s;
+      opacity: 1;
+    }
 
-  &:hover {
-    cursor: pointer;
-    background-color: rgba(white, 0.2);
-    font-size: 1.5em;
   }
-}
 
-.member-name {
-  color: white;
-}
+  .submit-button {
+    background: none;
+    border: none;
+    height: 25px;
+    padding: 0;
 
-.member-username {
-  margin-left: 15px;
-  color: darkgray;
-  font-size: 0.9em;
-}
+    &:focus {
+      outline: 0;
+    }
+  }
 
+  .members-list {
+    margin: 20px 10px;
+  }
+
+  .member-container {
+    display: flex;
+    background-color: rgba(white, 0.1);
+    padding: 10px;
+    margin: 10px;
+    font-size: 1.2em;
+
+    &:hover {
+      cursor: pointer;
+      background-color: rgba(white, 0.2);
+      transition: font-size 0.5s;
+      font-size: 1.5em;
+    }
+  }
+
+  .member-name {
+    color: white;
+  }
+
+  .member-username {
+    margin-left: 15px;
+    color: darkgray;
+    font-size: 0.9em;
+  }
+
+  .next-previous-page-container {
+    display: flex;
+    padding: 0 20px;
+    position: relative;
+    //justify-content: space-between;
+  }
+
+  .next-previous-page-button {
+    //@include submitButton;
+    width: 80px;
+    flex-grow: 0;
+    padding: 10px;
+    font-size: 0.8em;
+    margin-top: 20px;
+    background: none;
+    border-radius: 25px;
+    color: white;
+    border: 1px solid $accent-color;
+
+    &:hover {
+      transition: background-color 0.5s;
+      cursor: pointer;
+      background-color: $accent-color;
+    }
+  }
+
+  .right{
+    margin-right: 20px;
+    position: absolute;
+    right: 0;
+  }
+
+}

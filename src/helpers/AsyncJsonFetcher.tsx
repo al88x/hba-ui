@@ -47,8 +47,8 @@ export async function getMembersWithFilter(searchValue: string, filter: string) 
     return await response.json();
 }
 
-export async function getMemberList() {
-    return await fetch("http://localhost:8080/admin/members?page=1&pageSize=10",
+export async function getMemberList(pageToGo:string) {
+    return await fetch(`http://localhost:8080/admin${pageToGo}`,
         {
             method: 'GET',
             credentials: "include",

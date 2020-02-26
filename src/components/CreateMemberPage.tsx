@@ -61,7 +61,7 @@ export default function CreateMemberPage() {
             employeeNumber: values.employeeNumber,
             email: values.email
         };
-        const response = await asyncJSONPostFetch("http://localhost:8080/admin/members/create", JSON.stringify(data)).finally();
+        const response = await asyncJSONPostFetch("http://localhost:8080/admin/members/create", JSON.stringify(data));
         if (response.status === 200) {
             response.json()
                 .then(value => setUserId(value.userId));
@@ -81,7 +81,7 @@ export default function CreateMemberPage() {
     return (
         <section className="create-member-page">
             <h1>Create member</h1>
-            <form onSubmit={event => {event.preventDefault(); handleSubmit();}}>
+            <div>
                 <label>First Name</label>
                 <input className={`${errors.firstName ? "input invalid" : "input"}`}
                        type="text"
@@ -122,7 +122,7 @@ export default function CreateMemberPage() {
 
                 <p className={serverError ? "server-error visible" : "server-error"}>Error submitting your request.
                     Please try again later</p>
-            </form>
+            </div>
         </section>
     );
 }

@@ -2,12 +2,15 @@ import React, {useEffect, useState} from "react";
 import "../styles/MembersPage.scss"
 import {getMemberList, getMembersWithFilter} from "../helpers/AsyncJsonFetcher";
 import {useForm} from "../helpers/useForm";
+import LockIcon from '@material-ui/icons/Lock';
+import SearchIcon from '@material-ui/icons/Search';
 
 interface IMember {
     id: number,
     firstName: string,
     lastName: string,
     username: string,
+    active:boolean
 }
 
 enum IFilter {
@@ -34,8 +37,15 @@ export function MembersPage() {
 
     useEffect(() => {
         getMemberList(pageToGo)
-            .then(jsonResponse => {setNextPage(jsonResponse.nextPage); return jsonResponse;})
-            .then(jsonResponse => {setPreviousPage(jsonResponse.previousPage); return jsonResponse;})
+            .then(jsonResponse => {
+                setNextPage(jsonResponse.nextPage);
+                return jsonResponse;
+            })
+            .then(jsonResponse => {
+                setPreviousPage(jsonResponse.previousPage);
+                return jsonResponse;
+            })
+            // .then(value => console.log(value))
             .then(jsonResponse => setMembers(jsonResponse.items));
     }, [pageToGo]);
 
@@ -98,11 +108,7 @@ export function MembersPage() {
                 </form>
 
                 <button className="submit-button" onClick={handleSubmit}>
-                    <svg type="submit" className="search-button" xmlns="http://www.w3.org/2000/svg" width="36"
-                         height="36" viewBox="0 0 24 24">
-                        <path
-                            d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-                    </svg>
+                    <SearchIcon className="search-button"/>
                 </button>
             </div>
 
@@ -110,15 +116,22 @@ export function MembersPage() {
                 {members.map(member => (
                     <li key={member.id}>
                         <a className="member-container" href={`members/${member.id}`}>
-                            <p className="member-name">{member.firstName} {member.lastName}</p>
-                            <p className="member-username">({member.username})</p>
+                            <div className="member-name-container">
+                                <p className="member-name">{member.firstName} {member.lastName}</p>
+                                <p className="member-username">({member.username})</p>
+                            </div>
+                            <LockIcon className={member.active ? "invisible" : "lock-icon"}/>
                         </a>
                     </li>
                 ))}
             </ul>
             <div className="next-previous-page-container">
-                <button className={previousPage != null ? "next-previous-page-button" : "invisible"}  onClick={()=> setPageToGo(previousPage)}>Previous</button>
-                <button className={nextPage != null ? "next-previous-page-button right" : "invisible"}  onClick={()=> setPageToGo(nextPage)}>Next</button>
+                <button className={previousPage != null ? "next-previous-page-button" : "invisible"}
+                        onClick={() => setPageToGo(previousPage)}>Previous
+                </button>
+                <button className={nextPage != null ? "next-previous-page-button right" : "invisible"}
+                        onClick={() => setPageToGo(nextPage)}>Next
+                </button>
             </div>
         </div>
     );

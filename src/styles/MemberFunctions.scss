@@ -1,0 +1,79 @@
+@import "src/styles/general-styling";
+
+.member-functions-container {
+  margin: 10px auto;
+  max-width: $max-width;
+
+  .account-state-container {
+    background-color: rgba(white, 0.1);
+    color: white;
+    padding: 15px;
+    margin: 0 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .account{
+    font-weight: bold;
+    font-size: 1.1em;
+  }
+
+  .account-state{
+    margin: 10px 0;
+    font-size: 0.9em
+  }
+
+  .locked{
+    color: tomato;
+  }
+
+  .active{
+    color:greenyellow;
+  }
+
+
+  .submit{
+    @include submitButton;
+    margin:0;
+    font-size: 0.7em;
+    padding: 5px 10px;
+    flex-grow: 0;
+  }
+
+  .submitted-message{
+    color:white;
+    font-size: 0.9em;
+    margin-top: 10px;
+  }
+
+  .error{
+    color:tomato;
+  }
+
+  .invisible{
+    display:none;
+  }
+
+  .visible{
+    display: block;
+  }
+
+  .confirm-message{
+    display: flex;
+  }
+
+  .cancel{
+    margin: 0 5px;
+    background: none;
+    border: 1px solid tomato;
+  }
+
+  .lock-icon{
+    width: 36px;
+    height: 36px;
+    color:tomato;
+  }
+
+
+}
+

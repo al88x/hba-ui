@@ -80,6 +80,8 @@
   }
 
   .search-button {
+    width: 36px;
+    height: 36px;
     margin-top: 7px;
     opacity: 0.5;
     fill: white;
@@ -113,6 +115,7 @@
     padding: 10px;
     margin: 10px;
     font-size: 1.2em;
+    justify-content: space-between;
 
     &:hover {
       cursor: pointer;
@@ -120,6 +123,10 @@
       transition: font-size 0.5s;
       font-size: 1.5em;
     }
+  }
+
+  .member-name-container{
+    display: flex;
   }
 
   .member-name {
@@ -130,6 +137,10 @@
     margin-left: 15px;
     color: darkgray;
     font-size: 0.9em;
+  }
+
+  .lock-icon{
+    color: tomato;
   }
 
   .next-previous-page-container {

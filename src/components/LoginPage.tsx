@@ -13,25 +13,9 @@ interface ILoginForm {
 
 export function LoginPage() {
     const valuesInitialState: ILoginForm = {username: "", password: ""};
-    const {handleChange, handleSubmit, values, errors} = useForm(submit, validateLoginForm, valuesInitialState);
+    const {handleChange, handleSubmit, values, errors} = useForm(submit, valuesInitialState);
     const [invalidCredentials, setInvalidCredentials] = useState(false);
     const context = useContext(AuthContext);
-
-    function validateLoginForm(values: ILoginForm) {
-        let errors = {hasErrors: false, username: "", password: ""};
-        if (!values.username) {
-            errors.username = "Username should not be empty";
-            errors.hasErrors = true;
-        }
-        if (!values.password) {
-            errors.password = "Password should not be empty";
-            errors.hasErrors = true;
-        }
-        if (errors.hasErrors) {
-            return errors;
-        }
-        return {};
-    }
 
     async function submit() {
         const formData = {

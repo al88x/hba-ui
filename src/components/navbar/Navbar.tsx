@@ -1,5 +1,5 @@
-import React, {useContext, useState} from "react";
-import {Link, Redirect} from "react-router-dom";
+import React, {useContext} from "react";
+import {Link} from "react-router-dom";
 import {AuthContext} from "../../context/AuthContext";
 import "../../styles/Navbar.scss"
 import {logout} from "../../helpers/AsyncJsonFetcher";

@@ -21,38 +21,9 @@ export default function CreateMemberPage() {
         email: ""
     };
 
-    const {handleChange, handleSubmit, values, errors, handleValidationErrorsAfterSubmit} = useForm(submit, validateCreateMemberForm, valuesInitialState);
+    const {handleChange, handleSubmit, values, errors, handleValidationErrorsAfterSubmit} = useForm(submit, valuesInitialState);
     const [userId, setUserId] = useState(-1);
     const [serverError, setServerError] = useState(false);
-
-    function validateCreateMemberForm(values: ICreateMemberForm) {
-        let errors = {hasErrors: false, firstName: "", lastName: "", employeeNumber: "", email: ""};
-        if (values.firstName.length === 0) {
-            errors.firstName = "First name cannot be empty";
-            errors.hasErrors = true;
-        }
-        if (values.lastName.length === 0) {
-            errors.lastName = "Last name cannot be empty";
-            errors.hasErrors = true;
-        }
-        if (values.employeeNumber.length === 0) {
-            errors.employeeNumber = "Employee number cannot be empty";
-            errors.hasErrors = true;
-        } else if (isNaN(+values.employeeNumber)) {
-            errors.employeeNumber = "Employee number should be a number";
-            errors.hasErrors = true;
-        }
-        const validEmailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if (!validEmailRegex.test(values.email)) {
-            errors.email = "Please enter a valid email";
-            errors.hasErrors = true;
-        }
-
-        if (errors.hasErrors) {
-            return errors;
-        }
-        return {};
-    }
 
     async function submit() {
         const data = {

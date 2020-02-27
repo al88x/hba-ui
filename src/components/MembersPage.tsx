@@ -28,7 +28,7 @@ export function MembersPage() {
         searchValue: "",
         filter: IFilter.NAME
     };
-    const {handleChange, handleSubmit, values, errors} = useForm(submit, validateSearchForm, valuesInitialState);
+    const {handleChange, handleSubmit, values, errors} = useForm(submit, valuesInitialState);
     const [members, setMembers] = useState<IMember[]>([]);
     const [pageToGo, setPageToGo] = useState("/members?page=1&pageSize=10");
     const [nextPage, setNextPage] = useState("");
@@ -49,20 +49,6 @@ export function MembersPage() {
             .then(jsonResponse => setMembers(jsonResponse.items));
     }, [pageToGo]);
 
-    function validateSearchForm(values: ISearchForm) {
-        let errors = {hasErrors: false, searchValue: ""};
-        if (values.searchValue.length === 0) {
-            errors.searchValue = "Search value should not be empty";
-            errors.hasErrors = true;
-        } else if (values.filter === IFilter.EMPLOYEE_NUMBER && isNaN(+values.searchValue)) {
-            errors.searchValue = "Search value should be a number";
-            errors.hasErrors = true;
-        }
-        if (errors.hasErrors) {
-            return errors;
-        }
-        return {};
-    }
 
     function submit() {
         getMembersWithFilter(values.searchValue, values.filter)

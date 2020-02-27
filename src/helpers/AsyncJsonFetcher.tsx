@@ -170,5 +170,18 @@ export async function resendRegistrationEmail(id:string){
     });
 }
 
+export async function isResetPasswordTokenValid(token:string){
+    return await fetch(`http://localhost:8080/validate-reset-password-token?token=${token}`,
+        {
+            method: 'GET',
+            credentials: "include",
+            mode: 'cors',
+            headers: {"Content-Type": "application/json"},
+        })
+        .then(response => {
+            return response.ok ? response : Promise.reject();
+        });
+}
+
 
 

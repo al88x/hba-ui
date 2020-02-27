@@ -7,15 +7,7 @@
 
 
   select {
-    padding: 5px;
-    margin-top: 5px;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-
-    &:hover {
-      cursor: pointer;
-    }
+    @include select;
   }
 
   .invalid-select {

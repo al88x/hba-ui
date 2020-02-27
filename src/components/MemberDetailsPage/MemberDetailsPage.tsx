@@ -4,6 +4,7 @@ import {getMemberById} from "../../helpers/AsyncJsonFetcher";
 import PageNotFound from "../PageNotFound";
 import "../../styles/MemberDetailsPage.scss"
 import {MemberFunctions} from "./MemberFunctions";
+import {EditMember} from "./EditMember";
 
 export interface IMember {
     id:string,
@@ -25,14 +26,15 @@ export function MemberDetailsPage() {
     const {id} = useParams();
     const [member, setMember] = useState<IMember>();
     const [error, setError] = useState(false);
-    
+    const [memberUpdated, setMemberUpdated] = useState(false);
+
     useEffect(() => {
         if (id) {
             getMemberById(id)
                 .then(value => setMember(value))
                 .catch(error => setError(true));
         }
-    }, [id, member?.active]);
+    }, [id, member?.active, memberUpdated]);
 
     if (error) {
         return <PageNotFound/>;
@@ -40,18 +42,12 @@ export function MemberDetailsPage() {
 
     if (member) {
         return (
-            <div>
+            <div className="member-details-page-container">
                 <MemberFunctions member={member} setMember={setMember}/>
-                 {/*<EditMember/>*/}
+                 <EditMember member={member} setMember={setMember} setMemberUpdated={setMemberUpdated}/>
                 {/* <MemberHolidayBookings/>*/}
-
-                <p className="member">{member.username}</p>
-                <p className="member">{member.firstName} {member.lastName}</p>
-                <p className="member">{member.employeeNumber}</p>
-                <p className="member">{member.email}</p>
             </div>
         );
-
     }
     return null;
 }

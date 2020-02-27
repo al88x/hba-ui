@@ -37,7 +37,6 @@ export function MemberFunctions(props: IMemberFunctionsProps) {
                 .then(() => setSubmitted(true))
                 .then(() => setConfirmMessage(false))
                 .catch(() => setError(true));
-
         }
     }
 
@@ -54,7 +53,7 @@ export function MemberFunctions(props: IMemberFunctionsProps) {
         return (
             <div className="account-state-container">
                 <div>
-                    <p className="account">ACCOUNT:</p>
+                    <p className="account">ACCOUNT</p>
                     <p className={props.member.active ? "account-state active" : "account-state locked"}>{message}</p>
                     <button className={confirmMessage ? "invisible" : "submit"}
                             onClick={() => setConfirmMessage(true)}>{buttonMessage}

@@ -1,8 +1,6 @@
 @import "src/styles/general-styling";
 
 .member-functions-container {
-  margin: 10px auto;
-  max-width: $max-width;
 
   .account-state-container {
     background-color: rgba(white, 0.1);
@@ -14,12 +12,11 @@
   }
 
   .account{
-    font-weight: bold;
-    font-size: 1.1em;
+    @include sub-title();
   }
 
   .account-state{
-    margin: 10px 0;
+    margin: 20px 0 10px 0;
     font-size: 0.9em
   }
 
@@ -63,9 +60,8 @@
   }
 
   .cancel{
+    @include cancelButton;
     margin: 0 5px;
-    background: none;
-    border: 1px solid tomato;
   }
 
   .lock-icon{

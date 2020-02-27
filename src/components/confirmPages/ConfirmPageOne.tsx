@@ -18,7 +18,7 @@ interface IConfirmPageOne {
 export function ConfirmPageOne() {
     const {token} = useParams();
     const valuesInitialState = {employeeNumber: ""};
-    const {handleChange, handleSubmit, values, errors, handleValidationErrorsAfterSubmit} = useForm(submit, validateConfirmPageOneForm, valuesInitialState);
+    const {handleChange, handleSubmit, values, errors, handleValidationErrorsAfterSubmit} = useForm(submit, valuesInitialState);
     const [validEmployeeNumber, setValidEmployeeNumber] = useState(false);
     const [memberDetails, setMemberDetails] = useState<IMemberDetails>({memberId: -1});
     const [error, setError] = useState(false);
@@ -29,22 +29,7 @@ export function ConfirmPageOne() {
                 .then(value => setMemberDetails(value))
                 .catch(() => setError(true));
         }
-    }, []);
-
-    function validateConfirmPageOneForm(values: IConfirmPageOne) {
-        let errors = {hasErrors: false, employeeNumber: ""};
-        if (values.employeeNumber.length === 0) {
-            errors.employeeNumber = "Employee number cannot be empty";
-            errors.hasErrors = true;
-        } else if (isNaN(+values.employeeNumber)) {
-            errors.employeeNumber = "Employee number should be a number";
-            errors.hasErrors = true;
-        }
-        if (errors.hasErrors) {
-            return errors;
-        }
-        return {};
-    }
+    }, [token]);
 
     async function submit() {
         if (token) {

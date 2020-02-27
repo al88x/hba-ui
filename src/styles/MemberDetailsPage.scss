@@ -1,9 +1,10 @@
 @import "src/styles/general-styling";
 
-.member{
+
+
+.member-details-page-container{
   margin: 10px auto;
-  display: flex;
-  justify-content: center;
-  font-size: 2em;
-  color: white;
+  max-width: $max-width;
+
 }
+

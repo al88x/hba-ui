@@ -1,0 +1,76 @@
+@import "src/styles/general-styling";
+
+.edit-member-container{
+  background-color: rgba(white, 0.1);
+  color: white;
+  padding: 15px;
+  margin: 10px 20px;
+
+  .edit-member-subtitle{
+    @include sub-title;
+  }
+  .edit-member-line{
+    display: flex;
+    margin-bottom: 20px;
+    align-items: baseline;
+  }
+
+  .edit-input-container{
+    flex-grow: 1;
+  }
+
+  .input{
+    background: none;
+    border: none;
+    border-bottom: 1px solid gray;
+    font-size: 1em;
+    color: white;
+    width: 100%;
+  }
+
+  .select{
+    margin: 0;
+    padding: 0 5px;
+    height: 20px;
+    font-size: 0.7em;
+    width: 60%;
+  }
+
+  label{
+    @include label;
+    font-size: 1em;
+    margin:0;
+    width: 120px;
+  }
+
+@media screen and (min-width: $small-tablet-breakpoint){
+  label{
+    width:200px
+  }
+}
+  .edit-member-value{
+    font-size: 1em;
+    color: white;
+    width: 60%;
+  }
+
+  .edit-member-button{
+    @include submitButton;
+    margin: 0 20px 0 0;
+    padding: 10px 15px;
+  }
+
+  .cancel{
+    @include cancelButton;
+  }
+
+  .invalid {
+    border-bottom: 1px solid tomato;
+  }
+
+  .server-error{
+    padding-top: 10px;
+    color: tomato;
+  }
+}
+

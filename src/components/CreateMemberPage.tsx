@@ -21,38 +21,9 @@ export default function CreateMemberPage() {
         email: ""
     };
 
-    const {handleChange, handleSubmit, values, errors, handleValidationErrorsAfterSubmit} = useForm(submit, validateCreateMemberForm, valuesInitialState);
+    const {handleChange, handleSubmit, values, errors, handleValidationErrorsAfterSubmit} = useForm(submit, valuesInitialState);
     const [userId, setUserId] = useState(-1);
     const [serverError, setServerError] = useState(false);
-
-    function validateCreateMemberForm(values: ICreateMemberForm) {
-        let errors = {hasErrors: false, firstName: "", lastName: "", employeeNumber: "", email: ""};
-        if (values.firstName.length === 0) {
-            errors.firstName = "First name cannot be empty";
-            errors.hasErrors = true;
-        }
-        if (values.lastName.length === 0) {
-            errors.lastName = "Last name cannot be empty";
-            errors.hasErrors = true;
-        }
-        if (values.employeeNumber.length === 0) {
-            errors.employeeNumber = "Employee number cannot be empty";
-            errors.hasErrors = true;
-        } else if (isNaN(+values.employeeNumber)) {
-            errors.employeeNumber = "Employee number should be a number";
-            errors.hasErrors = true;
-        }
-        const validEmailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if (!validEmailRegex.test(values.email)) {
-            errors.email = "Please enter a valid email";
-            errors.hasErrors = true;
-        }
-
-        if (errors.hasErrors) {
-            return errors;
-        }
-        return {};
-    }
 
     async function submit() {
         const data = {
@@ -61,7 +32,7 @@ export default function CreateMemberPage() {
             employeeNumber: values.employeeNumber,
             email: values.email
         };
-        const response = await asyncJSONPostFetch("http://localhost:8080/admin/members/create", JSON.stringify(data)).finally();
+        const response = await asyncJSONPostFetch("http://localhost:8080/admin/members/create", JSON.stringify(data));
         if (response.status === 200) {
             response.json()
                 .then(value => setUserId(value.userId));
@@ -81,7 +52,7 @@ export default function CreateMemberPage() {
     return (
         <section className="create-member-page">
             <h1>Create member</h1>
-            <form onSubmit={event => {event.preventDefault(); handleSubmit();}}>
+            <div>
                 <label>First Name</label>
                 <input className={`${errors.firstName ? "input invalid" : "input"}`}
                        type="text"
@@ -122,7 +93,7 @@ export default function CreateMemberPage() {
 
                 <p className={serverError ? "server-error visible" : "server-error"}>Error submitting your request.
                     Please try again later</p>
-            </form>
+            </div>
         </section>
     );
 }

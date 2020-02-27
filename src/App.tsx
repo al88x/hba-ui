@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {BrowserRouter as Router, Route, Switch, useParams} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import {RouteProps} from 'react-router';
 import {LoginPage} from "./components/LoginPage";
 import {AuthContext, AuthContextProvider} from "./context/AuthContext";
@@ -9,7 +9,7 @@ import {AdminPage} from "./components/AdminPage";
 import {Navbar} from "./components/navbar/Navbar";
 import {MembersPage} from "./components/MembersPage";
 import CreateMemberPage from "./components/CreateMemberPage";
-import {MemberDetailsPage} from "./components/MemberDetailsPage";
+import {MemberDetailsPage} from "./components/MemberDetailsPage/MemberDetailsPage";
 import {ConfirmPageOne} from "./components/confirmPages/ConfirmPageOne";
 import {ForgotPasswordPage} from "./components/ForgotPasswordPage";
 import {PasswordSetUpPage, SetupPasswordMethod} from "./components/confirmPages/PasswordSetUpPage";

@@ -47,8 +47,8 @@ export async function getMembersWithFilter(searchValue: string, filter: string) 
     return await response.json();
 }
 
-export async function getMemberList() {
-    return await fetch("http://localhost:8080/admin/members?page=1&pageSize=10",
+export async function getMemberList(pageToGo:string) {
+    return await fetch(`http://localhost:8080/admin${pageToGo}`,
         {
             method: 'GET',
             credentials: "include",
@@ -141,6 +141,46 @@ export async function resetPassword(data: string) {
         headers: {'Access-Control-Allow-Origin': 'http://localhost:3000', 'Content-Type': 'application/json'},
         body: data
     });
+}
+
+export async function lockAccount(id:string){
+    return await fetch(`http://localhost:8080/admin/members/lock-account?id=${id}`, {
+        credentials: "include",
+        mode: 'cors',
+        method: 'POST',
+        headers: {'Access-Control-Allow-Origin': 'http://localhost:3000', 'Content-Type': 'application/json'},
+    });
+}
+
+export async function activateAccount(id:string){
+    return await fetch(`http://localhost:8080/admin/members/activate-account?id=${id}`, {
+        credentials: "include",
+        mode: 'cors',
+        method: 'POST',
+        headers: {'Access-Control-Allow-Origin': 'http://localhost:3000', 'Content-Type': 'application/json'},
+    });
+}
+
+export async function resendRegistrationEmail(id:string){
+    return await fetch(`http://localhost:8080/admin/members/send-registration-email?id=${id}`, {
+        credentials: "include",
+        mode: 'cors',
+        method: 'POST',
+        headers: {'Access-Control-Allow-Origin': 'http://localhost:3000', 'Content-Type': 'application/json'},
+    });
+}
+
+export async function isResetPasswordTokenValid(token:string){
+    return await fetch(`http://localhost:8080/validate-reset-password-token?token=${token}`,
+        {
+            method: 'GET',
+            credentials: "include",
+            mode: 'cors',
+            headers: {"Content-Type": "application/json"},
+        })
+        .then(response => {
+            return response.ok ? response : Promise.reject();
+        });
 }
 
 

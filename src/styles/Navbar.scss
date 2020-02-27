@@ -3,15 +3,23 @@
 nav {
   width:100%;
   background-color: $black-color;
-  font-size: 1em;
   padding: $standard-padding;
+
+}
+
+.nav-container{
   display: flex;
   justify-content: space-between;
+  font-size: 1em;
   font-family: $nav-text;
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 10px 0;
 }
 
 .main-nav-elements {
   display: flex;
+
 }
 
 .nav-element {

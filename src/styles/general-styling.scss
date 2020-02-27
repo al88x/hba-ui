@@ -1,4 +1,3 @@
-
 @import url("https://fonts.googleapis.com/css?family=Kulim+Park|Montserrat|Rubik&display=swap");
 
 $blue-color: #2E4158;
@@ -7,19 +6,20 @@ $white-color: white;
 $accent-color: #52C4B9;
 
 
-$nav-text:'Kulim Park', sans-serif;
-$header-text:'Rubik', sans-serif;
-$body-text:'Montserrat', sans-serif;
-$button-text:'Montserrat', sans-serif;
+$nav-text: 'Kulim Park', sans-serif;
+$header-text: 'Rubik', sans-serif;
+$body-text: 'Montserrat', sans-serif;
+$button-text: 'Montserrat', sans-serif;
 
-$standard-padding: 15px 0;
+$standard-padding: 15 0;
+$max-width: 600px;
 
 $small-tablet-breakpoint: 620px;
 $laptop-breakpoint: 960px;
 $large-desktop-breakpoint: 1200px;
 
 
-@mixin h1{
+@mixin h1 {
   font-family: $header-text;
   font-size: 40px;
   text-align: center;
@@ -27,16 +27,16 @@ $large-desktop-breakpoint: 1200px;
   margin: 60px 0 20px 0;
 }
 
-@mixin label{
+@mixin label {
   text-transform: uppercase;
   font-size: 1em;
   color: $white-color;
   margin: 40px 0 5px 0;
-  display:inline-block;
+  display: inline-block;
 
 }
 
-@mixin input{
+@mixin input {
   width: 100%;
   background-color: transparent;
   border: none;
@@ -48,7 +48,7 @@ $large-desktop-breakpoint: 1200px;
   padding-bottom: 5px;
 }
 
-@mixin submitButton{
+@mixin submitButton {
   background-color: #52C4B9;
   color: white;
   border: none;
@@ -62,7 +62,7 @@ $large-desktop-breakpoint: 1200px;
   flex-grow: 1;
 }
 
-@mixin form{
+@mixin form {
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -95,25 +95,38 @@ $large-desktop-breakpoint: 1200px;
   .invalid {
     border-bottom: 1px solid tomato;
   }
-  .server-error{
+  .server-error {
     background: rgba(255, 99, 71, 0.3);
     border: 1px solid tomato;
-    color:tomato;
+    color: tomato;
     display: none;
-    padding:10px;
+    padding: 10px;
     border-radius: 25px;
     text-align: center;
   }
-  .visible{
+  .visible {
     display: block;
   }
 }
-@mixin circle-pagination{
-  .circle-container{
+
+@mixin select {
+  padding: 5px;
+  margin-top: 5px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+@mixin circle-pagination {
+  .circle-container {
     margin: 20px auto;
   }
 
-  .circle{
+  .circle {
     vertical-align: middle;
     margin: auto 5px;
     height: 10px;
@@ -123,10 +136,10 @@ $large-desktop-breakpoint: 1200px;
     display: inline-block;
   }
 
-  .current-page{
+  .current-page {
     height: 15px;
     width: 15px;
-    background-color:$accent-color;
+    background-color: $accent-color;
   }
 }
 
@@ -137,17 +150,37 @@ $large-desktop-breakpoint: 1200px;
     font-size: 1em;
     color: #333333;
   }
+}
 
-  .homepage-link {
+.homepage-link {
 
-    font-size: 1em;
-    color: #333333;
+  font-size: 1em;
+  color: #333333;
 
-    &:hover {
-      color: white;
-    }
+  &:hover {
+    color: white;
   }
-  .invisible {
-    display: none;
-  }
+}
+
+.invisible {
+  display: none;
+}
+
+@mixin sub-title() {
+  font-weight: bold;
+  font-size: 1.4em;
+  color: white;
+  margin-bottom: 20px;
+}
+
+@mixin cancelButton() {
+  background: none;
+  border: 1px solid tomato;
+}
+.invalid-select {
+  border: 2px solid tomato;
+}
+
+.invalid {
+  border-bottom: 1px solid tomato;
 }

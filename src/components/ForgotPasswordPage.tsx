@@ -8,22 +8,7 @@ interface IForgotPasswordForm {
 }
 
 export function ForgotPasswordPage() {
-    const {handleChange, handleSubmit, values, errors, submittedSuccessfully, setSubmittedSuccessfully} = useForm(submit, validateCreateMemberForm, {email: ""});
-
-    function validateCreateMemberForm(values: IForgotPasswordForm) {
-        let errors = {hasErrors: false, email: ""};
-
-        const validEmailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if (!validEmailRegex.test(values.email)) {
-            errors.email = "Please enter a valid email";
-            errors.hasErrors = true;
-        }
-
-        if (errors.hasErrors) {
-            return errors;
-        }
-        return {};
-    }
+    const {handleChange, handleSubmit, values, errors, submittedSuccessfully, setSubmittedSuccessfully} = useForm(submit, {email: ""});
 
     function submit() {
         sendPasswordResetEmail(values.email)

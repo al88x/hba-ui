@@ -16,32 +16,8 @@ export function ConfirmPageThree() {
     const {token} = useParams();
 
     const valuesInitialState: IConfirmPageThree = {shift:"", jobRole:"", department:"", area:""};
-    const {handleChange, handleSubmit, values, errors, serverError, setServerError, submittedSuccessfully, setSubmittedSuccessfully} = useForm(submit, validateCreateMemberForm, valuesInitialState);
+    const {handleChange, handleSubmit, values, errors, serverError, setServerError, submittedSuccessfully, setSubmittedSuccessfully} = useForm(submit, valuesInitialState);
 
-    function validateCreateMemberForm(values: IConfirmPageThree) {
-        let errors = {hasErrors: false, shift:"", jobRole:"", department:"", area:""};
-
-        if (values.shift.length === 0) {
-            errors.shift = "Please select your shift";
-            errors.hasErrors = true;
-        }
-        if (values.jobRole.length === 0) {
-            errors.jobRole = "Please select your role";
-            errors.hasErrors = true;
-        }
-        if (values.department.length === 0) {
-            errors.department = "Please select your department";
-            errors.hasErrors = true;
-        }
-        if (values.area.length === 0) {
-            errors.area = "Please select your area";
-            errors.hasErrors = true;
-        }
-        if (errors.hasErrors) {
-            return errors;
-        }
-        return {};
-    }
 
     function submit() {
         const data = {token: token, shift: values.shift, jobRole:values.jobRole, department:values.department, area:values.area};

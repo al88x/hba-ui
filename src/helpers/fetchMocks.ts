@@ -16,7 +16,8 @@ export function mockFailedFetch() {
             "username":null,
             "role":null
         })
+
     });
     // @ts-ignore
     jest.spyOn(global, 'fetch').mockImplementation(() => response);
-}
+} 

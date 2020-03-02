@@ -30,60 +30,8 @@ describe('login page', () => {
         expect(loginPage.getByTestId("SubmitButton")).toBeInTheDocument();
         expect(loginPage.getByTestId("ForgotPassword")).toBeInTheDocument();
 
-    })
-
-    it("should not render Login Page if context is not loaded", () => {
-
-        mockFailedFetch();
-
-        const loginPage = render(
-            <AuthContextProvider isContextLoaded={false} isLoggedIn={false}>
-                <LoginPage/>
-            </AuthContextProvider>);
-
-        expect(loginPage.queryByTestId("LoginForm")).toBeNull();
-
-    })
-
-    it("username and password input fields should update username variable", async () => {
-
-        mockFailedFetch();
-
-        const loginPage = render(
-            <AuthContextProvider isContextLoaded={true} isLoggedIn={false}>
-                <LoginPage/>
-            </AuthContextProvider>);
-
-        const inputUsername = loginPage.getByTestId("Username");
-        const inputPassword = loginPage.getByTestId("Password");
-
-        await act(async () => {
-            fireEvent.change(inputUsername, {target: {value: 'randomLongUsernameString'}});
-            fireEvent.change(inputPassword, {target: {value: 'randomLongPasswordString'}});
-        })
-
-        expect(loginPage.getByDisplayValue("randomLongPasswordString")).toBeInTheDocument();
-        expect(loginPage.getByDisplayValue("randomLongUsernameString")).toBeInTheDocument();
     });
 
-    it("show login page with invalid credentials message on unsuccessful login", async () => {
-
-        mockFailedFetch();
-
-        const loginPage = render(
-            <AuthContextProvider isContextLoaded={true} isLoggedIn={false}>
-                <LoginPage/>
-            </AuthContextProvider>);
-
-        const submitButton = loginPage.getByTestId("SubmitButton");
-        fireEvent(submitButton, new MouseEvent('click'));
-
-        await wait(() => expect(loginPage.getByText("Username")).toBeInTheDocument());
-        await wait(() => expect(loginPage.getByText("Password")).toBeInTheDocument());
-        await wait(() => expect(loginPage.getByTestId("LoginForm")).toBeInTheDocument());
-        await wait(() => expect(loginPage.getByTestId("InvalidCredentials")).toHaveClass("wrong-credentials visible"));
-
-    });
 
     it("redirect to /admin on successful login", async () => {
 

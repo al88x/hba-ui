@@ -23,4 +23,4 @@ describe('Admin page', () => {
         expect(adminPage.getByText("Welcome alex_admin")).toBeInTheDocument();
 
     })
-})
+});

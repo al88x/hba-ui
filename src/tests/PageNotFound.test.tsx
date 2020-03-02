@@ -2,7 +2,6 @@ import React from "react";
 import {render} from "@testing-library/react";
 import {AuthContextProvider} from "../context/AuthContext";
 import {mockFailedFetch} from "../helpers/fetchMocks";
-import {UserPage} from "../components/UserPage";
 import PageNotFound from "../components/PageNotFound";
 
 describe('Page Not Found page', () => {

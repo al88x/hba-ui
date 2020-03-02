@@ -1,12 +1,6 @@
 coverage:
     range: 70..100
     round: down
-    status:
-        project:
-            default:
-                target: 90%
-        patch:
-            default:
-              target: 90%
+
 ignore:      
     - "src/index.tsx"

@@ -60,19 +60,4 @@ describe('App page', () => {
         expect(app.getByText("404")).toBeInTheDocument();
         expect(app.getByText("Oops! Page not found")).toBeInTheDocument();
     })
-
-    it("should return null", () => {
-
-        mockFailedFetch();
-
-        const app = render(
-            <AuthContextProvider isContextLoaded={false} isLoggedIn={false} >
-                <BrowserRouter>
-                    <ProtectedRoute component={UserPage} roleFilter="USER"/>
-                </BrowserRouter>
-            </AuthContextProvider>);
-
-
-        expect(app.queryByTestId("LoginForm")).toBeNull();
-    })
-})
+});

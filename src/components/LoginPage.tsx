@@ -22,7 +22,8 @@ export function LoginPage() {
             username: values.username,
             password: values.password
         };
-        const jsonResponse = await asyncJSONPostFetch("http://localhost:8080/login", JSON.stringify(formData)).finally();
+        const jsonResponse = await asyncJSONPostFetch(`${process.env.REACT_APP_HBA_API_URL}/login`, JSON.stringify(formData)).finally();
+
         if (jsonResponse.status === 200) {
             await asyncGetUserDetails()
                 .then(jsonResponse => context.dispatch({type: "FETCH_USER", payload: jsonResponse}))

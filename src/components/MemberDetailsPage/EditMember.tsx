@@ -28,7 +28,7 @@ export function EditMember(props: IEditMemberProps) {
             department: values.department,
             area: values.area,
         };
-        const response = await asyncJSONPostFetch("http://localhost:8080/admin/members/update", JSON.stringify(data));
+        const response = await asyncJSONPostFetch(`${process.env.REACT_APP_HBA_API_URL}/admin/members/update`, JSON.stringify(data));
         if (response.status === 200) {
             props.setMemberUpdated(true);
             setEditMember(false);

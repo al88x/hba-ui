@@ -1,13 +1,13 @@
 export async function asyncJSONPostFetch(url: string, formData: string) {
-    const response = await fetch(url, {
+   return await fetch(url, {
         credentials: "include",
         mode: 'cors',
         method: 'POST',
         headers: {'Access-Control-Allow-Origin': `${process.env.REACT_APP_HBA_UI_BASE_URL}`, 'Content-Type': 'application/json'},
         body: formData
     });
-    return response;
 }
+
 
 export async function asyncGetUserDetails() {
     const response = await fetch(`${process.env.REACT_APP_HBA_API_URL}/`, {

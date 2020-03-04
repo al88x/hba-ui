@@ -32,7 +32,7 @@ export default function CreateMemberPage() {
             employeeNumber: values.employeeNumber,
             email: values.email
         };
-        const response = await asyncJSONPostFetch("http://localhost:8080/admin/members/create", JSON.stringify(data));
+        const response = await asyncJSONPostFetch(`${process.env.REACT_APP_HBA_API_URL}/admin/members/create`, JSON.stringify(data));
         if (response.status === 200) {
             response.json()
                 .then(value => setUserId(value.userId));

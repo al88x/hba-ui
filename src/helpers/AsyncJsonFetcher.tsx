@@ -10,7 +10,7 @@ export async function asyncJSONPostFetch(url: string, formData: string) {
 }
 
 export async function asyncGetUserDetails() {
-    const response = await fetch(`${process.env.HBA_API_URL}/`, {
+    const response = await fetch(`${process.env.REACT_APP_HBA_API_URL}/`, {
         method: 'GET',
         credentials: "include",
         mode: 'cors',
@@ -22,7 +22,7 @@ export async function asyncGetUserDetails() {
 }
 
 export async function getMemberById(id: string) {
-    const response = await fetch(`${process.env.HBA_API_URL}/admin/members/searchById?id=${id}`,
+    const response = await fetch(`${process.env.REACT_APP_HBA_API_URL}/admin/members/searchById?id=${id}`,
         {
             method: 'GET',
             credentials: "include",
@@ -35,7 +35,7 @@ export async function getMemberById(id: string) {
 }
 
 export async function getMembersWithFilter(searchValue: string, filter: string) {
-    const response = await fetch(`${process.env.HBA_API_URL}/admin/members/search?value=${searchValue}&filter=${filter}`,
+    const response = await fetch(`${process.env.REACT_APP_HBA_API_URL}/admin/members/search?value=${searchValue}&filter=${filter}`,
         {
             method: 'GET',
             credentials: "include",
@@ -48,7 +48,7 @@ export async function getMembersWithFilter(searchValue: string, filter: string) 
 }
 
 export async function getMemberList(pageToGo:string) {
-    return await fetch(`${process.env.HBA_API_URL}/admin${pageToGo}`,
+    return await fetch(`${process.env.REACT_APP_HBA_API_URL}/admin${pageToGo}`,
         {
             method: 'GET',
             credentials: "include",
@@ -62,7 +62,7 @@ export async function getMemberList(pageToGo:string) {
 }
 
 export async function getMemberIdFromToken(token: string) {
-    return await fetch(`${process.env.HBA_API_URL}/register/confirm?token=${token}`,
+    return await fetch(`${process.env.REACT_APP_HBA_API_URL}/register/confirm?token=${token}`,
         {
             method: 'GET',
             credentials: "include",
@@ -76,7 +76,7 @@ export async function getMemberIdFromToken(token: string) {
 }
 
 export async function isEmployeeNumberValid(token: string, employeeNumber: string) {
-    return await fetch(`${process.env.HBA_API_URL}/register/confirm?token=${token}&employeeNumber=${employeeNumber}`,
+    return await fetch(`${process.env.REACT_APP_HBA_API_URL}/register/confirm?token=${token}&employeeNumber=${employeeNumber}`,
         {
             method: 'GET',
             credentials: "include",
@@ -89,7 +89,7 @@ export async function isEmployeeNumberValid(token: string, employeeNumber: strin
 }
 
 export async function savePasswordToDatabase(data: string) {
-    return await fetch(`${process.env.HBA_API_URL}/register/confirm/pageTwo`, {
+    return await fetch(`${process.env.REACT_APP_HBA_API_URL}/register/confirm/pageTwo`, {
         credentials: "include",
         mode: 'cors',
         method: 'POST',
@@ -102,7 +102,7 @@ export async function savePasswordToDatabase(data: string) {
 }
 
 export async function saveMemberDetails(data: string) {
-    return await fetch(`${process.env.HBA_API_URL}/register/confirm/pageThree`, {
+    return await fetch(`${process.env.REACT_APP_HBA_API_URL}/register/confirm/pageThree`, {
         credentials: "include",
         mode: 'cors',
         method: 'POST',
@@ -115,7 +115,7 @@ export async function saveMemberDetails(data: string) {
 }
 
 export async function logout() {
-    return await fetch(`${process.env.HBA_API_URL}/logout`,
+    return await fetch(`${process.env.REACT_APP_HBA_API_URL}/logout`,
         {
             method: 'GET',
             credentials: "include",
@@ -125,7 +125,7 @@ export async function logout() {
 }
 
 export async function sendPasswordResetEmail(email:string){
-    return await fetch(`${process.env.HBA_API_URL}/forgot-password?email=${email}`,
+    return await fetch(`${process.env.REACT_APP_HBA_API_URL}/forgot-password?email=${email}`,
         {
             method: 'GET',
             credentials: "include",
@@ -134,7 +134,7 @@ export async function sendPasswordResetEmail(email:string){
         });
 }
 export async function resetPassword(data: string) {
-    return await fetch(`${process.env.HBA_API_URL}/reset-password`, {
+    return await fetch(`${process.env.REACT_APP_HBA_API_URL}/reset-password`, {
         credentials: "include",
         mode: 'cors',
         method: 'POST',
@@ -144,7 +144,7 @@ export async function resetPassword(data: string) {
 }
 
 export async function lockAccount(id:string){
-    return await fetch(`${process.env.HBA_API_URL}/admin/members/lock-account?id=${id}`, {
+    return await fetch(`${process.env.REACT_APP_HBA_API_URL}/admin/members/lock-account?id=${id}`, {
         credentials: "include",
         mode: 'cors',
         method: 'POST',
@@ -153,7 +153,7 @@ export async function lockAccount(id:string){
 }
 
 export async function activateAccount(id:string){
-    return await fetch(`${process.env.HBA_API_URL}/admin/members/activate-account?id=${id}`, {
+    return await fetch(`${process.env.REACT_APP_HBA_API_URL}/admin/members/activate-account?id=${id}`, {
         credentials: "include",
         mode: 'cors',
         method: 'POST',
@@ -162,7 +162,7 @@ export async function activateAccount(id:string){
 }
 
 export async function resendRegistrationEmail(id:string){
-    return await fetch(`${process.env.HBA_API_URL}/admin/members/send-registration-email?id=${id}`, {
+    return await fetch(`${process.env.REACT_APP_HBA_API_URL}/admin/members/send-registration-email?id=${id}`, {
         credentials: "include",
         mode: 'cors',
         method: 'POST',
@@ -171,7 +171,7 @@ export async function resendRegistrationEmail(id:string){
 }
 
 export async function isResetPasswordTokenValid(token:string){
-    return await fetch(`${process.env.HBA_API_URL}/validate-reset-password-token?token=${token}`,
+    return await fetch(`${process.env.REACT_APP_HBA_API_URL}/validate-reset-password-token?token=${token}`,
         {
             method: 'GET',
             credentials: "include",

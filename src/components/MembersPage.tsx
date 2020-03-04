@@ -13,7 +13,7 @@ interface IMember {
     active:boolean
 }
 
-enum IFilter {
+export enum IFilter {
     NAME = "name",
     EMPLOYEE_NUMBER = "employee-number"
 }
@@ -45,12 +45,12 @@ export function MembersPage() {
                 setPreviousPage(jsonResponse.previousPage);
                 return jsonResponse;
             })
-            // .then(value => console.log(value))
             .then(jsonResponse => setMembers(jsonResponse.items));
     }, [pageToGo]);
 
 
     function submit() {
+        setNotFoundMessage("");
         getMembersWithFilter(values.searchValue, values.filter)
             .then(jsonResponse => setMembers(jsonResponse))
             .catch(() => setNotFoundMessage("No match found..."));

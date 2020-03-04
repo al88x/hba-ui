@@ -112,10 +112,10 @@ export function MembersPage() {
                 ))}
             </ul>
             <div className="next-previous-page-container">
-                <button className={previousPage != null ? "next-previous-page-button" : "invisible"}
+                <button className={(members.length > 0 && previousPage != null) ? "next-previous-page-button" : "invisible"}
                         onClick={() => setPageToGo(previousPage)}>Previous
                 </button>
-                <button className={nextPage != null ? "next-previous-page-button right" : "invisible"}
+                <button className={(members.length > 0 && nextPage != null) ? "next-previous-page-button right" : "invisible"}
                         onClick={() => setPageToGo(nextPage)}>Next
                 </button>
             </div>

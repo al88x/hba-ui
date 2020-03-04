@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react";
+import {IFilter} from "../components/MembersPage";
 
 export const useForm = (callback:any, valuesInitialState:any) => {
     const [values, setValues] = useState<any>(valuesInitialState);
@@ -28,7 +29,7 @@ export const useForm = (callback:any, valuesInitialState:any) => {
     }, [errors]);
 
     function validateForm(values:any) {
-        let errors = {hasErrors: false, firstName: "", lastName: "", employeeNumber: "", email: "", shift:"", jobRole:"", department:"", area:"" , resetNewPassword: "", confirmResetNewPassword: "", username: "", password:""};
+        let errors = {hasErrors: false, firstName: "", lastName: "", employeeNumber: "", email: "", shift:"", jobRole:"", department:"", area:"" , resetNewPassword: "", confirmResetNewPassword: "", username: "", password:"", searchValue:""};
         if (values.firstName !=null && values.firstName.length === 0) {
             errors.firstName = "First name cannot be empty";
             errors.hasErrors = true;
@@ -89,6 +90,14 @@ export const useForm = (callback:any, valuesInitialState:any) => {
             errors.password = "Password should not be empty";
             errors.hasErrors = true;
         }
+        if (values.searchValue.length === 0) {
+            errors.searchValue = "Search value should not be empty";
+            errors.hasErrors = true;
+        } else if (values.filter === IFilter.EMPLOYEE_NUMBER && isNaN(+values.searchValue)) {
+            errors.searchValue = "Search value should be a number";
+            errors.hasErrors = true;
+        }
+
         console.log(errors);
         if (errors.hasErrors) {
             return errors;

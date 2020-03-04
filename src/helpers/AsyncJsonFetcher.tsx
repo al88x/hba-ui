@@ -3,7 +3,7 @@ export async function asyncJSONPostFetch(url: string, formData: string) {
         credentials: "include",
         mode: 'cors',
         method: 'POST',
-        headers: {'Access-Control-Allow-Origin': 'http://localhost:3000', 'Content-Type': 'application/json'},
+        headers: {'Access-Control-Allow-Origin': `${process.env.REACT_APP_HBA_UI_BASE_URL}`, 'Content-Type': 'application/json'},
         body: formData
     });
     return response;
@@ -93,7 +93,7 @@ export async function savePasswordToDatabase(data: string) {
         credentials: "include",
         mode: 'cors',
         method: 'POST',
-        headers: {'Access-Control-Allow-Origin': 'http://localhost:3000', 'Content-Type': 'application/json'},
+        headers: {'Access-Control-Allow-Origin': `${process.env.REACT_APP_HBA_UI_BASE_URL}`, 'Content-Type': 'application/json'},
         body: data
     })
         .then(response => {
@@ -106,7 +106,7 @@ export async function saveMemberDetails(data: string) {
         credentials: "include",
         mode: 'cors',
         method: 'POST',
-        headers: {'Access-Control-Allow-Origin': 'http://localhost:3000', 'Content-Type': 'application/json'},
+        headers: {'Access-Control-Allow-Origin': `${process.env.REACT_APP_HBA_UI_BASE_URL}`, 'Content-Type': 'application/json'},
         body: data
     })
         .then(response => {
@@ -138,7 +138,7 @@ export async function resetPassword(data: string) {
         credentials: "include",
         mode: 'cors',
         method: 'POST',
-        headers: {'Access-Control-Allow-Origin': 'http://localhost:3000', 'Content-Type': 'application/json'},
+        headers: {'Access-Control-Allow-Origin': `${process.env.REACT_APP_HBA_UI_BASE_URL}`, 'Content-Type': 'application/json'},
         body: data
     });
 }
@@ -148,7 +148,7 @@ export async function lockAccount(id:string){
         credentials: "include",
         mode: 'cors',
         method: 'POST',
-        headers: {'Access-Control-Allow-Origin': 'http://localhost:3000', 'Content-Type': 'application/json'},
+        headers: {'Access-Control-Allow-Origin': `${process.env.REACT_APP_HBA_UI_BASE_URL}`, 'Content-Type': 'application/json'},
     });
 }
 
@@ -157,7 +157,7 @@ export async function activateAccount(id:string){
         credentials: "include",
         mode: 'cors',
         method: 'POST',
-        headers: {'Access-Control-Allow-Origin': 'http://localhost:3000', 'Content-Type': 'application/json'},
+        headers: {'Access-Control-Allow-Origin': `${process.env.REACT_APP_HBA_UI_BASE_URL}`, 'Content-Type': 'application/json'},
     });
 }
 
@@ -166,7 +166,7 @@ export async function resendRegistrationEmail(id:string){
         credentials: "include",
         mode: 'cors',
         method: 'POST',
-        headers: {'Access-Control-Allow-Origin': 'http://localhost:3000', 'Content-Type': 'application/json'},
+        headers: {'Access-Control-Allow-Origin': `${process.env.REACT_APP_HBA_UI_BASE_URL}`, 'Content-Type': 'application/json'},
     });
 }
 

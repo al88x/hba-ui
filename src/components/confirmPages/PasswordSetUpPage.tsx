@@ -28,8 +28,6 @@ export function PasswordSetUpPage(props: IPasswordSetUpPageProps) {
 
 
     function submit() {
-        console.log(props.account);
-        console.log(token);
         const data = {token: token, password: values.resetNewPassword};
         if (props.account === SetupPasswordMethod.NEW) {
             savePasswordToDatabase(JSON.stringify(data))
@@ -49,7 +47,7 @@ export function PasswordSetUpPage(props: IPasswordSetUpPageProps) {
                 .then(() => setIsTokenValid(true))
                 .catch(() => setIsTokenValid(false));
         }
-    }, [token]);
+    }, [token, props.account]);
 
     if (submittedSuccessfully) {
         return <ConfirmPageThree/>

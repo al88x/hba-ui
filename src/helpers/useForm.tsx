@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {IFilter} from "../components/MembersPage";
 
-export const useForm = (callback:any, valuesInitialState:any) => {
+export const useForm = (submitCallback:any, valuesInitialState:any) => {
     const [values, setValues] = useState<any>(valuesInitialState);
     const [errors, setErrors] = useState<any>({});
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -24,7 +24,7 @@ export const useForm = (callback:any, valuesInitialState:any) => {
 
     useEffect(() => {
         if (Object.keys(errors).length === 0 && isSubmitting) {
-            callback();
+            submitCallback();
         }
     }, [errors]);
 
@@ -97,8 +97,6 @@ export const useForm = (callback:any, valuesInitialState:any) => {
             errors.searchValue = "Search value should be a number";
             errors.hasErrors = true;
         }
-
-        console.log(errors);
         if (errors.hasErrors) {
             return errors;
         }

@@ -22,9 +22,8 @@ export interface IMember {
 }
 
 export function MemberDetailsPage() {
-
     const {id} = useParams();
-    const [member, setMember] = useState<IMember>();
+    const [member, setMember] = useState<IMember | null>(null);
     const [error, setError] = useState(false);
     const [memberUpdated, setMemberUpdated] = useState(false);
 

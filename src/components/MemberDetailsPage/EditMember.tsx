@@ -11,11 +11,25 @@ interface IEditMemberProps {
 }
 
 export function EditMember(props: IEditMemberProps) {
-    const valuesInitialInputState = props.member;
+    const valuesInitialInputState = {
+        id:props.member.id,
+        firstName: props.member.firstName,
+        lastName: props.member.lastName,
+        employeeNumber: props.member.employeeNumber,
+        username: props.member.username,
+        shift: `${props.member.shift === null ? "" : props.member.shift}`,
+        jobRole: `${props.member.jobRole === null ? "" : props.member.jobRole}`,
+        department: `${props.member.department === null ? "" : props.member.department}`,
+        area: `${props.member.area === null ? "" : props.member.area}`,
+        email: props.member.email,
+        active: props.member.active,
+        pendingAccountRegistration: props.member.pendingAccountRegistration
+    };
     const [editMember, setEditMember] = useState(false);
     const {handleChange, handleSubmit, values, errors, handleValidationErrorsAfterSubmit, serverError, setServerError} = useForm(submit, valuesInitialInputState);
 
     async function submit() {
+        props.setMemberUpdated(false);
         const data = {
             id: values.id,
             firstName: values.firstName,

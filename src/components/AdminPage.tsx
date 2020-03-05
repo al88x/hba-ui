@@ -7,7 +7,7 @@ export function AdminPage() {
 
     return(
         <div className="admin-page">
-            <p className="welcome" data-testid="Welcome">Welcome {context.state.username}</p>
+            <h1 className="welcome" data-testid="Welcome">Welcome {context.state.username}</h1>
         </div>
     );
 }

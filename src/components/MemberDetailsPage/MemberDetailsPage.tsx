@@ -33,7 +33,7 @@ export function MemberDetailsPage() {
                 .then(value => setMember(value))
                 .catch(error => setError(true));
         }
-    }, [id, member?.active, memberUpdated]);
+    }, [id, memberUpdated]);
 
     if (error) {
         return <PageNotFound/>;
